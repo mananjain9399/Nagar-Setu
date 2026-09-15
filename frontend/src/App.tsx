@@ -28,6 +28,25 @@ import { BeforeAfterComparisonView } from './components/demo/BeforeAfterComparis
 export function App() {
   const [activeTab, setActiveTab] = useState<ActiveTabType>('dashboard');
 
+  // Theme State: 'light' | 'dark'
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    const saved = localStorage.getItem('nagar_setu_theme');
+    return saved === 'dark' ? 'dark' : 'light';
+  });
+
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    localStorage.setItem('nagar_setu_theme', theme);
+  }, [theme]);
+
+  const handleToggleTheme = () => {
+    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
+  };
+
   // Dashboard stats
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [qualityScore, setQualityScore] = useState<number | undefined>(undefined);
@@ -115,7 +134,7 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f4f7fb] text-slate-800 flex flex-col font-sans">
+    <div className="min-h-screen bg-[#f8fafc] dark:bg-[#090e17] text-slate-800 dark:text-slate-100 flex flex-col font-sans transition-colors duration-200">
       {/* Top Operator Header with Navigation Tabs */}
       <OperatorHeader
         activeTab={activeTab}
@@ -123,6 +142,8 @@ export function App() {
         pendingReviewCount={stats?.summary.requiresHumanReviewCount || 0}
         totalComplaints={stats?.summary.totalComplaints || 0}
         qualityScore={qualityScore}
+        theme={theme}
+        onToggleTheme={handleToggleTheme}
       />
 
       {/* Main Content Area */}

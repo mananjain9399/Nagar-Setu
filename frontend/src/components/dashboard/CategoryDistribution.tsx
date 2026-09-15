@@ -13,46 +13,44 @@ export const CategoryDistribution: React.FC<CategoryDistributionProps> = ({
   onSelectCategory,
 }) => {
   return (
-    <div className="bw-card rounded-xl p-5 flex flex-col justify-between">
+    <div className="bg-white border border-slate-200 rounded-md p-4 shadow-xs flex flex-col justify-between">
       <div>
-        <div className="flex items-center justify-between pb-3 mb-3 border-b border-slate-100">
-          <div className="flex items-center gap-2.5">
-            <div className="p-1.5 rounded-lg bg-emerald-50 text-emerald-600">
-              <Tag className="w-4 h-4" />
-            </div>
-            <h3 className="text-sm font-bold text-slate-900 tracking-tight">
-              Complaints by Category
+        <div className="flex items-center justify-between pb-2.5 mb-2.5 border-b border-slate-100">
+          <div className="flex items-center gap-2">
+            <Tag className="w-4 h-4 text-emerald-600" />
+            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-800">
+              Grievance Categories
             </h3>
           </div>
-          <span className="text-xs text-emerald-700 font-mono font-bold px-2 py-0.5 rounded bg-emerald-50 border border-emerald-100">
-            Top {data.length} Categories
+          <span className="text-[10px] text-slate-500 font-mono font-medium px-2 py-0.5 rounded bg-slate-50 border border-slate-200">
+            {data.length} TYPES
           </span>
         </div>
 
-        <div className="space-y-1.5 max-h-[380px] overflow-y-auto pr-1">
+        <div className="space-y-1 max-h-[380px] overflow-y-auto pr-1">
           {data.slice(0, 10).map((c) => {
             const pct = total > 0 ? Math.round((c.count / total) * 100) : 0;
             return (
               <div
                 key={c.name}
                 onClick={() => onSelectCategory(c.name)}
-                className="group cursor-pointer p-2 rounded-lg hover:bg-slate-50 transition-all"
+                className="group cursor-pointer p-2 rounded hover:bg-slate-50 border border-transparent hover:border-slate-200 transition-all"
               >
-                <div className="flex items-center justify-between text-xs mb-1">
-                  <span className="font-semibold text-slate-700 group-hover:text-emerald-700 transition-colors truncate max-w-[210px]">
+                <div className="flex items-center justify-between text-xs mb-1.5">
+                  <span className="font-medium text-slate-800 group-hover:text-emerald-700 transition-colors truncate max-w-[190px]">
                     {c.name}
                   </span>
-                  <div className="flex items-center gap-2">
-                    <span className="text-slate-400 font-mono text-[11px] font-medium">{pct}%</span>
-                    <span className="font-mono font-bold text-slate-800 bg-slate-100 px-2 py-0.5 rounded text-[11px] border border-slate-200">
+                  <div className="flex items-center gap-1.5 font-mono text-[11px]">
+                    <span className="text-slate-400">{pct}%</span>
+                    <span className="font-bold text-slate-900 bg-slate-100 px-1.5 py-0.2 rounded border border-slate-200">
                       {c.count}
                     </span>
-                    <ChevronRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-emerald-600 group-hover:translate-x-0.5 transition-all" />
+                    <ChevronRight className="w-3 h-3 text-slate-400 group-hover:text-emerald-600 group-hover:translate-x-0.5 transition-all" />
                   </div>
                 </div>
-                <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+                <div className="w-full bg-slate-100 h-1.5 rounded-sm overflow-hidden">
                   <div
-                    className="bg-emerald-600 h-full rounded-full transition-all duration-300"
+                    className="bg-emerald-600 h-full rounded-sm transition-all duration-300"
                     style={{ width: `${Math.max(4, pct)}%` }}
                   />
                 </div>

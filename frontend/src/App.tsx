@@ -28,25 +28,6 @@ import { BeforeAfterComparisonView } from './components/demo/BeforeAfterComparis
 export function App() {
   const [activeTab, setActiveTab] = useState<ActiveTabType>('dashboard');
 
-  // Theme State: 'light' | 'dark'
-  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
-    const saved = localStorage.getItem('nagar_setu_theme');
-    return saved === 'dark' ? 'dark' : 'light';
-  });
-
-  useEffect(() => {
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-    localStorage.setItem('nagar_setu_theme', theme);
-  }, [theme]);
-
-  const handleToggleTheme = () => {
-    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
-  };
-
   // Dashboard stats
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [qualityScore, setQualityScore] = useState<number | undefined>(undefined);
@@ -134,7 +115,7 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] dark:bg-[#090e17] text-slate-800 dark:text-slate-100 flex flex-col font-sans transition-colors duration-200">
+    <div className="min-h-screen bg-[#f4f6f9] text-slate-900 flex flex-col font-sans">
       {/* Top Operator Header with Navigation Tabs */}
       <OperatorHeader
         activeTab={activeTab}
@@ -142,16 +123,14 @@ export function App() {
         pendingReviewCount={stats?.summary.requiresHumanReviewCount || 0}
         totalComplaints={stats?.summary.totalComplaints || 0}
         qualityScore={qualityScore}
-        theme={theme}
-        onToggleTheme={handleToggleTheme}
       />
 
       {/* Main Content Area */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-5">
         {/* ================= VIEW 1: DASHBOARD ================= */}
         {activeTab === 'dashboard' && (
-          <div className="space-y-8">
-            {/* Top Clean Greeting Hero */}
+          <div className="space-y-4">
+            {/* Top Command Center Hero Banner */}
             {stats && (
               <GreetingHero
                 stats={stats.summary}
@@ -164,18 +143,18 @@ export function App() {
               />
             )}
 
-            {/* Operational Section Anchor */}
-            <div id="operational-analytics" className="space-y-6 pt-2">
-              <div className="flex items-center justify-between pb-2 border-b border-slate-200">
+            {/* Operational Section */}
+            <div id="operational-analytics" className="space-y-3 pt-1">
+              <div className="flex items-center justify-between pb-1.5 border-b border-slate-200">
                 <div>
-                  <h3 className="text-lg font-bold text-slate-900 tracking-tight font-heading">
-                    Zone Operational Overview
+                  <h3 className="text-sm font-bold uppercase tracking-wider text-slate-900 font-heading">
+                    ZONE OPERATIONAL OVERVIEW
                   </h3>
-                  <p className="text-xs text-slate-500 mt-0.5">
+                  <p className="text-xs text-slate-500">
                     Live grievance indicators and automated municipal triage metrics
                   </p>
                 </div>
-                <span className="text-xs font-mono font-medium text-slate-500 bg-white px-2.5 py-1 rounded-md border border-slate-200">
+                <span className="text-[10px] font-mono font-medium text-slate-500 bg-white px-2 py-0.5 rounded border border-slate-200">
                   REAL-TIME STATS
                 </span>
               </div>
@@ -190,7 +169,7 @@ export function App() {
 
               {/* Distribution Grids */}
               {stats && (
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 pt-1">
                   {/* 1. Complaints by Department */}
                   <DepartmentDistribution
                     data={stats.byDepartment}
@@ -206,7 +185,7 @@ export function App() {
                   />
 
                   {/* 3. Locality & Ward Density + Channels */}
-                  <div className="space-y-5">
+                  <div className="space-y-3">
                     <LocalityWardDistribution
                       localities={stats.byLocality}
                       wards={stats.byWard}
@@ -227,7 +206,7 @@ export function App() {
 
         {/* ================= VIEW 2: COMPLAINT QUEUE ================= */}
         {activeTab === 'queue' && (
-          <div className="space-y-4">
+          <div className="space-y-3">
             {/* Multi-point Filter Toolbar */}
             <QueueFilterToolbar
               filters={filters}
@@ -252,7 +231,7 @@ export function App() {
           </div>
         )}
 
-        {/* ================= VIEW 3: AI PIPELINE ENGINE (PHASE 3) ================= */}
+        {/* ================= VIEW 3: AI PIPELINE ENGINE ================= */}
         {activeTab === 'ai-pipeline' && (
           <AIPipelineView
             onInspectComplaint={(complaintId) => setSelectedComplaintId(complaintId)}
@@ -260,26 +239,26 @@ export function App() {
           />
         )}
 
-        {/* ================= VIEW 4: WEEKLY DIGEST & HOTSPOTS (PHASE 5) ================= */}
+        {/* ================= VIEW 4: WEEKLY DIGEST & HOTSPOTS ================= */}
         {activeTab === 'digest' && (
           <WeeklyDigestView
             onInspectComplaint={(complaintId) => setSelectedComplaintId(complaintId)}
           />
         )}
 
-        {/* ================= VIEW 5: EVALUATION BENCHMARK (PHASE 5) ================= */}
+        {/* ================= VIEW 5: EVALUATION BENCHMARK ================= */}
         {activeTab === 'evaluation' && <EvaluationDashboardView />}
 
         {/* ================= VIEW 6: BEFORE VS AFTER COMPARISON DEMO ================= */}
         {activeTab === 'comparison' && <BeforeAfterComparisonView />}
 
-        {/* ================= VIEW 7: TAXONOMY MANAGEMENT (PHASE 2) ================= */}
+        {/* ================= VIEW 7: TAXONOMY MANAGEMENT ================= */}
         {activeTab === 'taxonomy' && <TaxonomyManagementView />}
 
-        {/* ================= VIEW 8: GAZETTEER & NORMALISER (PHASE 2) ================= */}
+        {/* ================= VIEW 8: GAZETTEER & NORMALISER ================= */}
         {activeTab === 'gazetteer' && <GazetteerManagementView />}
 
-        {/* ================= VIEW 9: DATA QUALITY AUDIT (PHASE 2) ================= */}
+        {/* ================= VIEW 9: DATA QUALITY AUDIT ================= */}
         {activeTab === 'quality' && (
           <DataQualityView
             onInspectComplaint={(complaintId) => setSelectedComplaintId(complaintId)}
@@ -311,15 +290,15 @@ export function App() {
       )}
 
       {/* Footer */}
-      <footer className="bg-white border-t border-slate-200 text-slate-500 text-xs py-3.5 px-4 text-center mt-auto shadow-sm">
+      <footer className="bg-white border-t border-slate-200 text-slate-500 text-xs py-3 px-4 text-center mt-auto shadow-xs">
         <div className="flex flex-col sm:flex-row items-center justify-between max-w-7xl mx-auto gap-2">
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
-            <span className="font-bold text-slate-800">Nagar Setu (नगर सेतु)</span>
-            <span className="text-slate-500">• Bhopal Civic Grievance & Intelligence Bridge</span>
+            <span className="font-bold text-slate-900">NAGAR SETU (नगर सेतु)</span>
+            <span className="text-slate-500">• Bhopal Municipal Corporation • Zone Operations Console</span>
           </div>
-          <p className="text-slate-400 font-mono text-[11px]">
-            Bhopal Municipal Corporation • Zone Operations Console • Synthetic Triage Dataset
+          <p className="text-slate-400 font-mono text-[10px]">
+            Enterprise Civic Grievance & Intelligence Bridge
           </p>
         </div>
       </footer>

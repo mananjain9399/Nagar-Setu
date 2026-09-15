@@ -86,48 +86,48 @@ export const DatasetImportView: React.FC<DatasetImportViewProps> = ({ onImportCo
   };
 
   return (
-    <div className="space-y-5 max-w-4xl mx-auto">
+    <div className="space-y-4 max-w-4xl mx-auto">
       {/* Overview Notice Card */}
-      <div className="bg-slate-900 border border-slate-800 rounded-lg p-4 flex items-start gap-3 shadow-sm">
-        <ShieldCheck className="w-5 h-5 text-sky-400 flex-shrink-0 mt-0.5" />
+      <div className="bg-white border border-slate-200 rounded-md p-4 flex items-start gap-3 shadow-xs">
+        <ShieldCheck className="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" />
         <div className="text-xs">
-          <h3 className="font-semibold text-slate-100 mb-0.5">
+          <h3 className="font-bold uppercase tracking-wider text-slate-900 mb-0.5">
             Anonymised Complaint Dataset Ingestion
           </h3>
-          <p className="text-slate-400 leading-relaxed">
+          <p className="text-slate-600 leading-relaxed">
             Upload or paste batch grievance exports from external channels (CM Helpline 181, Municipal App, Elected Rep notes). The engine automatically parses raw complaint text, identifies languages, extracts location entities, and queues tickets for operator review.
           </p>
         </div>
       </div>
 
       {/* Mode Selector Tabs */}
-      <div className="flex items-center gap-2 bg-slate-950 p-1 rounded-lg border border-slate-800 max-w-md">
+      <div className="flex items-center gap-1 bg-slate-100 p-0.5 rounded border border-slate-200 max-w-md">
         <button
           onClick={() => setImportMode('sample')}
-          className={`flex-1 py-1.5 px-3 rounded-md text-xs font-medium transition-colors ${
+          className={`flex-1 py-1 px-2.5 rounded text-xs font-semibold transition-all cursor-pointer ${
             importMode === 'sample'
-              ? 'bg-sky-600 text-white shadow'
-              : 'text-slate-400 hover:text-slate-200'
+              ? 'bg-white text-slate-900 shadow-xs'
+              : 'text-slate-600 hover:text-slate-900'
           }`}
         >
           Quick Demo Dataset
         </button>
         <button
           onClick={() => setImportMode('file')}
-          className={`flex-1 py-1.5 px-3 rounded-md text-xs font-medium transition-colors ${
+          className={`flex-1 py-1 px-2.5 rounded text-xs font-semibold transition-all cursor-pointer ${
             importMode === 'file'
-              ? 'bg-sky-600 text-white shadow'
-              : 'text-slate-400 hover:text-slate-200'
+              ? 'bg-white text-slate-900 shadow-xs'
+              : 'text-slate-600 hover:text-slate-900'
           }`}
         >
           Upload CSV File
         </button>
         <button
           onClick={() => setImportMode('text')}
-          className={`flex-1 py-1.5 px-3 rounded-md text-xs font-medium transition-colors ${
+          className={`flex-1 py-1 px-2.5 rounded text-xs font-semibold transition-all cursor-pointer ${
             importMode === 'text'
-              ? 'bg-sky-600 text-white shadow'
-              : 'text-slate-400 hover:text-slate-200'
+              ? 'bg-white text-slate-900 shadow-xs'
+              : 'text-slate-600 hover:text-slate-900'
           }`}
         >
           Paste CSV / JSON
@@ -136,21 +136,21 @@ export const DatasetImportView: React.FC<DatasetImportViewProps> = ({ onImportCo
 
       {/* Mode 1: Quick Sample Dataset */}
       {importMode === 'sample' && (
-        <div className="bg-slate-900 border border-slate-800 rounded-lg p-5 shadow-sm space-y-4">
+        <div className="bg-white border border-slate-200 rounded-md p-4 shadow-xs space-y-3">
           <div className="flex items-center gap-2">
-            <Play className="w-4 h-4 text-emerald-400" />
-            <h4 className="text-sm font-semibold text-slate-100">
+            <Play className="w-4 h-4 text-emerald-600" />
+            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-900">
               Load Sample Anonymised Bhopal Export (CSV)
             </h4>
           </div>
-          <p className="text-xs text-slate-400 leading-relaxed">
-            Instantly ingest our pre-bundled synthetic sample file containing 5 multi-channel complaints across Karond, Bairagarh, Arera Hills, and Kolar Road to test the pipeline.
+          <p className="text-xs text-slate-600 leading-relaxed">
+            Instantly ingest our pre-bundled synthetic sample file containing multi-channel complaints across Karond, Bairagarh, Arera Hills, and Kolar Road to test the pipeline.
           </p>
 
           <button
             onClick={handleSampleImport}
             disabled={loading}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-medium text-xs rounded-md shadow transition-colors disabled:opacity-50"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs rounded shadow-xs transition-colors disabled:opacity-50 cursor-pointer"
           >
             <UploadCloud className="w-4 h-4" />
             <span>{loading ? 'Ingesting Sample Records...' : 'Load & Ingest Sample Dataset'}</span>
@@ -160,13 +160,13 @@ export const DatasetImportView: React.FC<DatasetImportViewProps> = ({ onImportCo
 
       {/* Mode 2: File Upload */}
       {importMode === 'file' && (
-        <form onSubmit={handleFileUpload} className="bg-slate-900 border border-slate-800 rounded-lg p-5 shadow-sm space-y-4">
+        <form onSubmit={handleFileUpload} className="bg-white border border-slate-200 rounded-md p-4 shadow-xs space-y-3">
           <div className="flex items-center gap-2">
-            <FileText className="w-4 h-4 text-sky-400" />
-            <h4 className="text-sm font-semibold text-slate-100">Upload CSV Export File</h4>
+            <FileText className="w-4 h-4 text-blue-600" />
+            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-900">Upload CSV Export File</h4>
           </div>
 
-          <div className="border-2 border-dashed border-slate-750 hover:border-sky-500/50 rounded-lg p-6 text-center transition-colors">
+          <div className="border-2 border-dashed border-slate-200 hover:border-blue-500 rounded p-6 text-center transition-colors bg-slate-50">
             <input
               type="file"
               accept=".csv"
@@ -175,11 +175,11 @@ export const DatasetImportView: React.FC<DatasetImportViewProps> = ({ onImportCo
               id="csv-file-input"
             />
             <label htmlFor="csv-file-input" className="cursor-pointer block">
-              <UploadCloud className="w-8 h-8 text-slate-500 mx-auto mb-2" />
-              <span className="text-xs text-slate-300 font-medium block">
+              <UploadCloud className="w-6 h-6 text-slate-400 mx-auto mb-1" />
+              <span className="text-xs text-slate-700 font-medium block">
                 {file ? file.name : 'Click to select an exported CSV file'}
               </span>
-              <span className="text-[11px] text-slate-500 block mt-1">
+              <span className="text-[10px] text-slate-400 block mt-0.5">
                 Supports complaint_id, source_channel, complaint_text, locality, ward_no, etc.
               </span>
             </label>
@@ -188,7 +188,7 @@ export const DatasetImportView: React.FC<DatasetImportViewProps> = ({ onImportCo
           <button
             type="submit"
             disabled={!file || loading}
-            className="px-4 py-2 bg-sky-600 hover:bg-sky-500 text-white font-medium text-xs rounded-md shadow transition-colors disabled:opacity-50"
+            className="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs rounded shadow-xs transition-colors disabled:opacity-50 cursor-pointer"
           >
             {loading ? 'Processing File...' : 'Start Batch Import'}
           </button>
@@ -197,25 +197,24 @@ export const DatasetImportView: React.FC<DatasetImportViewProps> = ({ onImportCo
 
       {/* Mode 3: Raw Text Paste */}
       {importMode === 'text' && (
-        <form onSubmit={handleTextImport} className="bg-slate-900 border border-slate-800 rounded-lg p-5 shadow-sm space-y-4">
+        <form onSubmit={handleTextImport} className="bg-white border border-slate-200 rounded-md p-4 shadow-xs space-y-3">
           <div className="flex items-center gap-2">
-            <FileCode className="w-4 h-4 text-sky-400" />
-            <h4 className="text-sm font-semibold text-slate-100">Paste CSV or JSON Payload</h4>
+            <FileCode className="w-4 h-4 text-blue-600" />
+            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-900">Paste CSV or JSON Payload</h4>
           </div>
 
           <textarea
-            rows={8}
+            rows={6}
             value={rawText}
             onChange={(e) => setRawText(e.target.value)}
-            placeholder={`complaint_id,source_channel,complaint_text,locality,ward_no
-IMP-01,CM_HELPLINE_181,"Water pipe leak near MP Nagar Zone-1 square",MP Nagar Zone-1,Ward 34`}
-            className="w-full bg-slate-950 border border-slate-750 rounded p-3 text-xs font-mono text-slate-200 placeholder-slate-600 focus:border-sky-500"
+            placeholder={`complaint_id,source_channel,complaint_text,locality,ward_no\nIMP-01,CM_HELPLINE_181,"Water pipe leak near MP Nagar Zone-1 square",MP Nagar Zone-1,Ward 34`}
+            className="w-full bg-slate-50 border border-slate-200 rounded p-2.5 text-xs font-mono text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:bg-white focus:outline-none"
           />
 
           <button
             type="submit"
             disabled={!rawText.trim() || loading}
-            className="px-4 py-2 bg-sky-600 hover:bg-sky-500 text-white font-medium text-xs rounded-md shadow transition-colors disabled:opacity-50"
+            className="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs rounded shadow-xs transition-colors disabled:opacity-50 cursor-pointer"
           >
             {loading ? 'Processing Payload...' : 'Parse & Ingest Records'}
           </button>
@@ -224,34 +223,34 @@ IMP-01,CM_HELPLINE_181,"Water pipe leak near MP Nagar Zone-1 square",MP Nagar Zo
 
       {/* Feedback Messages */}
       {errorMessage && (
-        <div className="p-3 bg-rose-950/60 border border-rose-800 rounded-lg flex items-center gap-2 text-xs text-rose-300">
-          <AlertCircle className="w-4 h-4 text-rose-400 flex-shrink-0" />
+        <div className="p-2.5 bg-rose-50 border border-rose-200 rounded flex items-center gap-2 text-xs text-rose-700">
+          <AlertCircle className="w-4 h-4 text-rose-600 flex-shrink-0" />
           <span>{errorMessage}</span>
         </div>
       )}
 
       {result && (
-        <div className="bg-slate-900 border border-emerald-500/40 rounded-lg p-4 shadow-sm space-y-2">
-          <div className="flex items-center gap-2 text-emerald-400 font-semibold text-xs">
+        <div className="bg-white border border-emerald-200 rounded-md p-4 shadow-xs space-y-2">
+          <div className="flex items-center gap-1.5 text-emerald-700 font-semibold text-xs">
             <CheckCircle2 className="w-4 h-4" />
             <span>Ingestion Batch Completed</span>
           </div>
           <div className="grid grid-cols-3 gap-2 text-xs font-mono pt-1">
-            <div className="bg-slate-950 p-2 rounded border border-slate-800">
+            <div className="bg-slate-50 p-2 rounded border border-slate-200">
               <span className="text-slate-500 block text-[10px]">TOTAL READ</span>
-              <span className="text-slate-100 font-bold">{result.totalRows}</span>
+              <span className="text-slate-900 font-bold">{result.totalRows}</span>
             </div>
-            <div className="bg-slate-950 p-2 rounded border border-slate-800">
-              <span className="text-emerald-500 block text-[10px]">IMPORTED</span>
-              <span className="text-emerald-300 font-bold">{result.importedCount}</span>
+            <div className="bg-emerald-50 p-2 rounded border border-emerald-200">
+              <span className="text-emerald-700 block text-[10px]">IMPORTED</span>
+              <span className="text-emerald-700 font-bold">{result.importedCount}</span>
             </div>
-            <div className="bg-slate-950 p-2 rounded border border-slate-800">
-              <span className="text-amber-500 block text-[10px]">SKIPPED / DUPS</span>
-              <span className="text-amber-300 font-bold">{result.skippedCount}</span>
+            <div className="bg-amber-50 p-2 rounded border border-amber-200">
+              <span className="text-amber-800 block text-[10px]">SKIPPED / DUPS</span>
+              <span className="text-amber-800 font-bold">{result.skippedCount}</span>
             </div>
           </div>
           {result.errors.length > 0 && (
-            <div className="mt-2 text-[11px] text-amber-400 bg-amber-950/40 p-2 rounded border border-amber-800/40">
+            <div className="mt-2 text-[11px] text-amber-800 bg-amber-50 p-2 rounded border border-amber-200">
               <span className="font-semibold block mb-0.5">Notes / Warnings:</span>
               <ul className="list-disc pl-4 space-y-0.5 font-mono text-[10px]">
                 {result.errors.map((err, i) => (
@@ -264,26 +263,26 @@ IMP-01,CM_HELPLINE_181,"Water pipe leak near MP Nagar Zone-1 square",MP Nagar Zo
       )}
 
       {/* Resilient Schema Mapping Reference */}
-      <div className="bg-slate-950/60 border border-slate-800 rounded-lg p-4 text-xs text-slate-400">
-        <h5 className="font-semibold text-slate-300 mb-2 uppercase text-[11px] tracking-wider">
+      <div className="bg-white border border-slate-200 rounded-md p-3.5 text-xs text-slate-600 shadow-xs">
+        <h5 className="font-semibold text-slate-800 mb-1.5 uppercase text-[10px] font-mono tracking-wider">
           Resilient Header Mapping Reference
         </h5>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 text-[11px]">
-          <div className="p-2 bg-slate-900 rounded border border-slate-850">
-            <strong className="text-slate-200 block">ID:</strong>
-            <code>complaint_id, id, external_id</code>
+          <div className="p-2 bg-slate-50 rounded border border-slate-200">
+            <strong className="text-slate-800 block">ID:</strong>
+            <code className="text-slate-600">complaint_id, id</code>
           </div>
-          <div className="p-2 bg-slate-900 rounded border border-slate-850">
-            <strong className="text-slate-200 block">Channel:</strong>
-            <code>source_channel, channel, source</code>
+          <div className="p-2 bg-slate-50 rounded border border-slate-200">
+            <strong className="text-slate-800 block">Channel:</strong>
+            <code className="text-slate-600">source_channel, source</code>
           </div>
-          <div className="p-2 bg-slate-900 rounded border border-slate-850">
-            <strong className="text-slate-200 block">Text:</strong>
-            <code>complaint_text, raw_text, text</code>
+          <div className="p-2 bg-slate-50 rounded border border-slate-200">
+            <strong className="text-slate-800 block">Text:</strong>
+            <code className="text-slate-600">complaint_text, raw_text</code>
           </div>
-          <div className="p-2 bg-slate-900 rounded border border-slate-850">
-            <strong className="text-slate-200 block">Location:</strong>
-            <code>locality, location, ward, ward_no</code>
+          <div className="p-2 bg-slate-50 rounded border border-slate-200">
+            <strong className="text-slate-800 block">Location:</strong>
+            <code className="text-slate-600">locality, ward, ward_no</code>
           </div>
         </div>
       </div>

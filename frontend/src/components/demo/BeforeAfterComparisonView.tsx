@@ -1,20 +1,17 @@
 import React, { useState } from 'react';
 import {
-  ArrowRight,
-  ShieldCheck,
   Sparkles,
   AlertTriangle,
   Building2,
   Tag,
   MapPin,
-  Clock,
   Volume2,
   Camera,
   CheckCircle2,
   Copy,
   Layers,
-  Fingerprint,
-  RefreshCw,
+  ShieldAlert,
+  ShieldCheck,
 } from 'lucide-react';
 
 interface PresetCase {
@@ -80,7 +77,7 @@ interface PresetCase {
 const PRESETS: PresetCase[] = [
   {
     id: 'case-water-leak',
-    title: 'Severe Water Contamination & Main Pipeline Rupture',
+    title: 'Severe Water Contamination & Pipeline Burst',
     channel: 'CM_HELPLINE_181',
     language: 'Hindi',
     mediaType: 'audio',
@@ -136,7 +133,7 @@ const PRESETS: PresetCase[] = [
   },
   {
     id: 'case-pothole-light',
-    title: 'Hazardous Road Pothole with Broken Streetlight',
+    title: 'Hazardous Road Pothole & Dark Streetlight',
     channel: 'SOCIAL_MEDIA',
     language: 'Hinglish',
     mediaType: 'image',
@@ -191,7 +188,7 @@ const PRESETS: PresetCase[] = [
   },
   {
     id: 'case-garbage-shahpura',
-    title: 'Overflowing Garbage Dump & Stray Dog Menace',
+    title: 'Solid Waste Accumulation & Animal Menace',
     channel: 'MUNICIPAL_APP',
     language: 'English',
     mediaType: 'text',
@@ -239,62 +236,6 @@ const PRESETS: PresetCase[] = [
         'Dear Citizen, complaint BMC-2026-09283 regarding waste clearance at Shahpura Sector A (Ward 52) has been queued for morning sanitation beat.',
     },
   },
-  {
-    id: 'case-ambiguous-audio',
-    title: 'Low-Confidence Ambiguous Audio (Operator Review Flagged)',
-    channel: 'CM_HELPLINE_181',
-    language: 'Hindi (Muffled)',
-    mediaType: 'audio',
-    raw: {
-      text: '...गली में तार टूट गया है... पानी भी... (अस्पष्ट आवाज)',
-      sender: 'Anonymous Caller (CM Helpline 181 Audio Export)',
-      channel: 'CM Helpline 181',
-      timestamp: 'Today, 11:20 AM',
-      mediaNote: 'Audio recording: 14s (Signal-to-noise ratio low, background traffic noise)',
-    },
-    structured: {
-      ticketId: 'BMC-2026-09284',
-      maskedSummary: 'Potential wire breakage or water issue with low-confidence audio requiring human operator review',
-      languageDetected: 'Hindi (Low SNR)',
-      transcription: {
-        text: '...गली में तार टूट गया है... पानी भी...',
-        confidence: 0.42,
-        flagged: true,
-      },
-      piiSummary: {
-        hasPII: false,
-        maskedTypes: [],
-      },
-      taxonomy: {
-        department: 'Street Lighting & Electricals',
-        category: 'Live Wire / Electrical Hazard',
-        confidence: 0.54,
-        reason: 'Possible wire breakage detected ("तार टूट गया"), but high ambiguity between electrical wire and water pipe.',
-      },
-      urgency: {
-        level: 'HIGH',
-        score: 80,
-        safety: 'Potential live overhead wire snap hazard in residential lane; prioritized precautionary review.',
-        outage: 'Local supply interruption uncertain.',
-        duration: 'Data unavailable (not stated).',
-      },
-      location: {
-        raw: 'गली में',
-        normalizedLocality: 'Indeterminate (Ambiguous)',
-        assignedWard: 'Requires Operator Clarification',
-        confidence: 0.2,
-        isAmbiguous: true,
-      },
-      cluster: {
-        clusterId: 'UNCLUSTERED',
-        duplicateScore: 0.0,
-        clusterSize: 1,
-        status: 'Cannot cluster due to indeterminate location coordinates',
-      },
-      draftResponse:
-        'नागरिक महोदय, आपकी शिकायत में स्थान की सटीक जानकारी स्पष्ट नहीं है। कृपया नजदीकी लैंडमार्क या वार्ड संख्या दर्ज करवाएं।',
-    },
-  },
 ];
 
 export const BeforeAfterComparisonView: React.FC = () => {
@@ -309,32 +250,28 @@ export const BeforeAfterComparisonView: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {/* Top Header Card */}
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm">
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div className="bg-white border border-slate-200 rounded-md p-4 shadow-xs">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
           <div>
             <div className="flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-teal-400" />
-              <h2 className="text-xl font-bold text-slate-100 bg-gradient-to-r from-teal-200 via-sky-200 to-indigo-200 bg-clip-text text-transparent">
-                Nagar Setu: Citizen Voice ➔ Municipal Action Bridge Demo
+              <Sparkles className="w-4 h-4 text-blue-600" />
+              <h2 className="text-sm font-bold uppercase tracking-wider text-slate-900">
+                BEFORE / AFTER INTELLIGENCE TRANSFORMATION
               </h2>
-              <span className="text-[11px] px-2 py-0.5 rounded-full font-mono font-semibold bg-teal-950 text-teal-300 border border-teal-800/60">
-                BEFORE VS AFTER TRANSFORMATION
-              </span>
             </div>
-            <p className="text-sm text-slate-400 mt-1 max-w-3xl">
-              Inspect how chaotic, multilingual, unstructured citizen complaints (unmasked PII, dialect audio, photos) cross the <span className="text-teal-300 font-semibold">Nagar Setu Bridge</span> into structured, audited municipal tickets grounded strictly in the Bhopal gazetteer and partner taxonomy.
+            <p className="text-xs text-slate-500 mt-0.5">
+              Comparison between raw citizen grievances and structured municipal tickets grounded in Bhopal's gazetteer and taxonomy.
             </p>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="text-xs text-slate-400">Select Test Case:</span>
+            <span className="text-xs text-slate-500 font-mono">Select Case:</span>
             <select
               value={selectedCaseId}
               onChange={(e) => setSelectedCaseId(e.target.value)}
-              aria-label="Select test preset comparison"
-              className="bg-slate-950/80 border border-slate-700 text-slate-200 text-xs rounded-lg px-3 py-2 font-medium focus:ring-1 focus:ring-teal-500 focus:border-teal-500"
+              className="bg-slate-50 border border-slate-200 text-slate-800 text-xs rounded px-2.5 py-1 font-medium focus:border-blue-600"
             >
               {PRESETS.map((p) => (
                 <option key={p.id} value={p.id}>
@@ -346,26 +283,26 @@ export const BeforeAfterComparisonView: React.FC = () => {
         </div>
 
         {/* Preset Selector Chips */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 mt-5 pt-5 border-t border-slate-800/80">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-3 pt-3 border-t border-slate-100">
           {PRESETS.map((p) => {
             const isSelected = p.id === selectedCaseId;
             return (
               <button
                 key={p.id}
                 onClick={() => setSelectedCaseId(p.id)}
-                className={`text-left p-3 rounded-xl border transition-all ${
+                className={`text-left p-2.5 rounded border transition-all cursor-pointer ${
                   isSelected
-                    ? 'bg-teal-950/40 border-teal-500/60 shadow-lg shadow-teal-500/10'
-                    : 'bg-slate-950/40 border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/40'
+                    ? 'bg-blue-50 border-blue-400 shadow-xs'
+                    : 'bg-slate-50 border-slate-200 hover:bg-slate-100'
                 }`}
               >
-                <div className="flex items-center justify-between text-[11px] text-slate-400 mb-1">
-                  <span className="font-mono uppercase text-teal-400 font-semibold">{p.channel}</span>
-                  <span className="px-2 py-0.5 rounded-full bg-slate-800/80 text-slate-300 text-[10px]">
+                <div className="flex items-center justify-between text-[10px] font-mono text-slate-500 mb-0.5">
+                  <span className="uppercase text-blue-700 font-bold">{p.channel}</span>
+                  <span className="px-1.5 py-0.2 rounded bg-slate-200 text-slate-700">
                     {p.language}
                   </span>
                 </div>
-                <div className="text-xs font-semibold text-slate-200 truncate">
+                <div className="text-xs font-semibold text-slate-900 truncate">
                   {p.title}
                 </div>
               </button>
@@ -375,306 +312,179 @@ export const BeforeAfterComparisonView: React.FC = () => {
       </div>
 
       {/* Comparison Grid: 2 Columns */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
-        {/* ================= COLUMN 1: BEFORE (RAW CITIZEN INTAKE) ================= */}
-        <div className="bg-slate-900/90 border border-rose-900/40 rounded-xl overflow-hidden shadow-sm flex flex-col">
-          {/* Header */}
-          <div className="bg-rose-950/50 border-b border-rose-800/40 px-5 py-3.5 flex items-center justify-between">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
+        {/* COLUMN 1: BEFORE (RAW CITIZEN INTAKE) */}
+        <div className="bg-white border border-rose-200 rounded-md overflow-hidden shadow-xs flex flex-col">
+          <div className="bg-rose-50 border-b border-rose-200 px-4 py-2.5 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-rose-500 animate-pulse" />
-              <h3 className="text-sm font-bold text-rose-200 uppercase tracking-wide">
+              <span className="w-2 h-2 rounded-full bg-rose-600" />
+              <h3 className="text-xs font-bold text-rose-900 uppercase tracking-wider">
                 BEFORE: Raw Citizen Intake (Unstructured)
               </h3>
             </div>
-            <span className="text-xs font-mono text-rose-300 bg-rose-900/40 px-2 py-0.5 rounded border border-rose-700/50">
-              CHANNEL: {activeCase.raw.channel}
+            <span className="text-[10px] font-mono text-rose-700 bg-white px-2 py-0.5 rounded border border-rose-200">
+              {activeCase.raw.channel}
             </span>
           </div>
 
-          <div className="p-5 space-y-4 text-xs">
-            {/* Raw Text Box */}
+          <div className="p-4 space-y-3 text-xs">
             <div>
-              <div className="flex items-center justify-between text-slate-400 font-medium mb-1.5">
-                <span>Original Citizen Text (Direct Export):</span>
-                <span className="font-mono text-[11px] text-slate-500">
-                  {activeCase.raw.timestamp}
-                </span>
+              <div className="flex items-center justify-between text-slate-500 font-mono text-[10px] mb-1 uppercase">
+                <span>Original Grievance Text:</span>
+                <span>{activeCase.raw.timestamp}</span>
               </div>
-              <div className="bg-slate-950 border border-slate-800 rounded-lg p-3.5 font-mono text-slate-300 text-xs leading-relaxed whitespace-pre-wrap">
+              <div className="bg-slate-50 border border-slate-200 rounded p-3 font-mono text-slate-800 text-xs leading-relaxed whitespace-pre-wrap">
                 {activeCase.raw.text}
               </div>
             </div>
 
-            {/* Media Attachment Note */}
             {activeCase.raw.mediaNote && (
-              <div className="flex items-center gap-2 p-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-slate-300">
+              <div className="flex items-center gap-2 p-2 rounded bg-slate-50 border border-slate-200 text-slate-700">
                 {activeCase.mediaType === 'audio' ? (
-                  <Volume2 className="w-4 h-4 text-amber-400 flex-shrink-0" />
+                  <Volume2 className="w-3.5 h-3.5 text-amber-600 flex-shrink-0" />
                 ) : (
-                  <Camera className="w-4 h-4 text-sky-400 flex-shrink-0" />
+                  <Camera className="w-3.5 h-3.5 text-blue-600 flex-shrink-0" />
                 )}
                 <span className="text-[11px] font-mono">{activeCase.raw.mediaNote}</span>
               </div>
             )}
 
-            {/* Raw Citizen Deficiencies Checklist */}
-            <div className="bg-slate-950/60 border border-slate-800 rounded-lg p-3.5 space-y-2">
-              <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+            <div className="bg-slate-50 border border-slate-200 rounded p-3 space-y-1.5">
+              <div className="text-[10px] font-mono font-bold text-slate-600 uppercase">
                 Unstructured Data Bottlenecks:
               </div>
-              <ul className="space-y-1.5 text-slate-400 text-[11px]">
-                <li className="flex items-center gap-2">
-                  <span className="text-rose-400 font-bold">✗</span>
-                  <span>
-                    <strong className="text-slate-300">Exposed PII:</strong> Phone number, email, or Aadhaar unmasked in database.
-                  </span>
+              <ul className="space-y-1 text-slate-600 text-[11px]">
+                <li className="flex items-center gap-1.5">
+                  <span className="text-rose-600 font-bold">✗</span>
+                  <span><strong>Exposed PII:</strong> Phone number/email exposed in plain text.</span>
                 </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-rose-400 font-bold">✗</span>
-                  <span>
-                    <strong className="text-slate-300">Unclassified:</strong> Department and category are completely unassigned.
-                  </span>
+                <li className="flex items-center gap-1.5">
+                  <span className="text-rose-600 font-bold">✗</span>
+                  <span><strong>Unclassified:</strong> Department and category are completely unassigned.</span>
                 </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-rose-400 font-bold">✗</span>
-                  <span>
-                    <strong className="text-slate-300">Informal Location:</strong> Informal phrasing with no standardized ward ID.
-                  </span>
+                <li className="flex items-center gap-1.5">
+                  <span className="text-rose-600 font-bold">✗</span>
+                  <span><strong>Informal Location:</strong> Vague phrasing with no municipal ward ID.</span>
                 </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-rose-400 font-bold">✗</span>
-                  <span>
-                    <strong className="text-slate-300">No Priority Metric:</strong> No objective urgency score for dispatchers.
-                  </span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-rose-400 font-bold">✗</span>
-                  <span>
-                    <strong className="text-slate-300">No Duplicate Awareness:</strong> Multiple callers clog up call centers for same issue.
-                  </span>
+                <li className="flex items-center gap-1.5">
+                  <span className="text-rose-600 font-bold">✗</span>
+                  <span><strong>No Urgency Metric:</strong> No objective score for dispatch priority.</span>
                 </li>
               </ul>
             </div>
           </div>
         </div>
 
-        {/* ================= COLUMN 2: AFTER (STRUCTURED CIVIC ENGINE INTELLIGENCE) ================= */}
-        <div className="bg-slate-900/90 border border-emerald-900/40 rounded-xl overflow-hidden shadow-sm flex flex-col">
-          {/* Header */}
-          <div className="bg-emerald-950/50 border-b border-emerald-800/40 px-5 py-3.5 flex items-center justify-between">
+        {/* COLUMN 2: AFTER (STRUCTURED CIVIC INTELLIGENCE) */}
+        <div className="bg-white border border-emerald-200 rounded-md overflow-hidden shadow-xs flex flex-col">
+          <div className="bg-emerald-50 border-b border-emerald-200 px-4 py-2.5 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-              <h3 className="text-sm font-bold text-emerald-200 uppercase tracking-wide">
-                AFTER: Structured Civic Engine Intelligence
+              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+              <h3 className="text-xs font-bold text-emerald-900 uppercase tracking-wider">
+                AFTER: Structured Municipal Intelligence
               </h3>
             </div>
-            <span className="text-xs font-mono text-emerald-300 bg-emerald-900/40 px-2 py-0.5 rounded border border-emerald-700/50">
+            <span className="text-[10px] font-mono text-emerald-800 bg-white px-2 py-0.5 rounded border border-emerald-200 font-bold">
               {activeCase.structured.ticketId}
             </span>
           </div>
 
-          <div className="p-5 space-y-4 text-xs">
-            {/* 1. Masked Summary & PII */}
-            <div className="space-y-1.5">
+          <div className="p-4 space-y-3 text-xs">
+            {/* Sanitized Summary */}
+            <div className="space-y-1">
               <div className="flex items-center justify-between">
-                <span className="font-semibold text-slate-300">Sanitized AI Summary:</span>
-                <span className="flex items-center gap-1 text-[11px] font-mono text-emerald-400">
-                  <ShieldCheck className="w-3.5 h-3.5" /> PII Protected
+                <span className="font-semibold text-slate-800">Sanitized AI Summary:</span>
+                <span className="flex items-center gap-1 text-[10px] font-mono text-emerald-700 font-bold">
+                  <ShieldCheck className="w-3 h-3" /> PII Protected
                 </span>
               </div>
-              <div className="bg-slate-950 border border-slate-800 rounded-lg p-3 text-slate-200 font-medium">
+              <div className="bg-slate-50 border border-slate-200 rounded p-2.5 text-slate-900 font-medium">
                 {activeCase.structured.maskedSummary}
               </div>
-              {activeCase.structured.piiSummary.hasPII && (
-                <div className="flex flex-wrap gap-1.5 pt-1">
-                  {activeCase.structured.piiSummary.maskedTypes.map((pt, i) => (
-                    <span
-                      key={i}
-                      className="px-2 py-0.5 rounded text-[10px] font-mono bg-amber-950/70 text-amber-300 border border-amber-800/60"
-                    >
-                      🛡️ {pt}
-                    </span>
-                  ))}
-                </div>
-              )}
             </div>
 
-            {/* 2. Multimodal Vision / Audio Extraction */}
-            {(activeCase.structured.transcription || activeCase.structured.visionSignals) && (
-              <div className="bg-slate-950/70 border border-slate-800 rounded-lg p-3 space-y-2">
-                <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-sky-400" />
-                  Multimodal Intake Signals
+            {/* Department & Category */}
+            <div className="grid grid-cols-2 gap-2">
+              <div className="bg-slate-50 border border-slate-200 rounded p-2.5">
+                <div className="flex items-center gap-1 text-slate-500 text-[10px] uppercase font-mono mb-0.5">
+                  <Building2 className="w-3 h-3 text-blue-600" />
+                  <span>Target Department</span>
                 </div>
-                {activeCase.structured.transcription && (
-                  <div className="text-[11px] space-y-1">
-                    <div className="flex items-center justify-between text-slate-400">
-                      <span>Audio Transcription Confidence:</span>
-                      <span
-                        className={`font-mono font-bold ${
-                          activeCase.structured.transcription.confidence < 0.6
-                            ? 'text-amber-400'
-                            : 'text-emerald-400'
-                        }`}
-                      >
-                        {(activeCase.structured.transcription.confidence * 100).toFixed(0)}%
-                      </span>
-                    </div>
-                    {activeCase.structured.transcription.flagged && (
-                      <div className="p-1.5 rounded bg-amber-950/60 border border-amber-800/50 text-amber-300 text-[10px] flex items-center gap-1">
-                        <AlertTriangle className="w-3.5 h-3.5 flex-shrink-0" />
-                        Flagged for human operator review (low acoustic confidence)
-                      </div>
-                    )}
-                  </div>
-                )}
-                {activeCase.structured.visionSignals && (
-                  <div className="space-y-1 pt-1">
-                    <div className="text-slate-400 text-[11px]">Civic Vision Detections:</div>
-                    <div className="flex flex-wrap gap-1.5">
-                      {activeCase.structured.visionSignals.labels.map((lbl, i) => (
-                        <span
-                          key={i}
-                          className="px-2 py-0.5 rounded text-[10px] font-mono bg-sky-950 text-sky-300 border border-sky-800"
-                        >
-                          📷 {lbl}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            )}
-
-            {/* 3. Taxonomy Routing & Grounded Evidence */}
-            <div className="grid grid-cols-2 gap-3">
-              <div className="bg-slate-950 border border-slate-800 rounded-lg p-3">
-                <div className="flex items-center gap-1.5 text-slate-400 text-[11px] mb-1">
-                  <Building2 className="w-3.5 h-3.5 text-indigo-400" />
-                  <span>Target Department:</span>
-                </div>
-                <div className="text-xs font-bold text-slate-100">
+                <div className="font-bold text-blue-800 text-xs">
                   {activeCase.structured.taxonomy.department}
                 </div>
-                <div className="text-[10px] text-slate-400 mt-0.5">
-                  Confidence: {(activeCase.structured.taxonomy.confidence * 100).toFixed(0)}%
-                </div>
               </div>
 
-              <div className="bg-slate-950 border border-slate-800 rounded-lg p-3">
-                <div className="flex items-center gap-1.5 text-slate-400 text-[11px] mb-1">
-                  <Tag className="w-3.5 h-3.5 text-purple-400" />
-                  <span>Category:</span>
+              <div className="bg-slate-50 border border-slate-200 rounded p-2.5">
+                <div className="flex items-center gap-1 text-slate-500 text-[10px] uppercase font-mono mb-0.5">
+                  <Tag className="w-3 h-3 text-emerald-600" />
+                  <span>Category</span>
                 </div>
-                <div className="text-xs font-bold text-slate-100 truncate">
+                <div className="font-bold text-slate-900 text-xs truncate">
                   {activeCase.structured.taxonomy.category}
                 </div>
-                <div className="text-[10px] text-slate-500 mt-0.5 truncate">
-                  {activeCase.structured.taxonomy.reason}
-                </div>
               </div>
             </div>
 
-            {/* 4. Strict 3-Criteria Urgency Scoring */}
-            <div className="bg-slate-950 border border-slate-800 rounded-lg p-3 space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-                  <AlertTriangle className="w-3.5 h-3.5 text-amber-400" />
-                  Strict 3-Criteria Urgency
-                </span>
-                <span
-                  className={`px-2 py-0.5 rounded text-[11px] font-mono font-bold ${
-                    activeCase.structured.urgency.level === 'CRITICAL'
-                      ? 'bg-rose-950 text-rose-300 border border-rose-800'
-                      : activeCase.structured.urgency.level === 'HIGH'
-                      ? 'bg-amber-950 text-amber-300 border border-amber-800'
-                      : 'bg-blue-950 text-blue-300 border border-blue-800'
-                  }`}
-                >
+            {/* Urgency & Location */}
+            <div className="grid grid-cols-2 gap-2">
+              <div className="bg-slate-50 border border-slate-200 rounded p-2.5">
+                <div className="text-[10px] font-mono uppercase text-slate-500 mb-0.5 font-semibold">
+                  3-Criteria Urgency
+                </div>
+                <div className="font-mono font-bold text-xs text-rose-700">
                   {activeCase.structured.urgency.level} ({activeCase.structured.urgency.score}/100)
-                </span>
-              </div>
-              <div className="grid grid-cols-3 gap-2 text-[10px]">
-                <div className="p-2 rounded bg-slate-900 border border-slate-800">
-                  <div className="text-slate-500 uppercase font-semibold">1. Safety:</div>
-                  <div className="text-slate-300 mt-0.5 leading-snug">{activeCase.structured.urgency.safety}</div>
                 </div>
-                <div className="p-2 rounded bg-slate-900 border border-slate-800">
-                  <div className="text-slate-500 uppercase font-semibold">2. Outage:</div>
-                  <div className="text-slate-300 mt-0.5 leading-snug">{activeCase.structured.urgency.outage}</div>
-                </div>
-                <div className="p-2 rounded bg-slate-900 border border-slate-800">
-                  <div className="text-slate-500 uppercase font-semibold">3. Duration:</div>
-                  <div className="text-slate-300 mt-0.5 leading-snug">{activeCase.structured.urgency.duration}</div>
+                <div className="text-[10px] text-slate-500 mt-0.5 truncate">
+                  Safety: {activeCase.structured.urgency.safety}
                 </div>
               </div>
-            </div>
 
-            {/* 5. Locality Normalisation & Ward Grounding */}
-            <div className="bg-slate-950 border border-slate-800 rounded-lg p-3 flex items-center justify-between">
-              <div>
-                <div className="flex items-center gap-1.5 text-slate-400 text-[11px]">
-                  <MapPin className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>Grounded Locality & Ward:</span>
+              <div className="bg-slate-50 border border-slate-200 rounded p-2.5">
+                <div className="flex items-center gap-1 text-[10px] font-mono uppercase text-slate-500 mb-0.5 font-semibold">
+                  <MapPin className="w-3 h-3 text-emerald-600" />
+                  <span>Grounded Location</span>
                 </div>
-                <div className="text-xs font-bold text-slate-200 mt-0.5">
+                <div className="font-bold text-slate-900 text-xs">
                   {activeCase.structured.location.normalizedLocality}
-                  {activeCase.structured.location.assignedWard && (
-                    <span className="ml-2 font-mono text-emerald-400">
-                      ({activeCase.structured.location.assignedWard})
-                    </span>
-                  )}
                 </div>
-              </div>
-              <div>
-                {activeCase.structured.location.isAmbiguous ? (
-                  <span className="px-2 py-1 rounded bg-amber-950 text-amber-300 text-[10px] font-mono border border-amber-800">
-                    Locality Ambiguous
-                  </span>
-                ) : (
-                  <span className="px-2 py-1 rounded bg-emerald-950 text-emerald-300 text-[10px] font-mono border border-emerald-800">
-                    Gazetteer Matched
-                  </span>
-                )}
+                <div className="text-[10px] font-mono text-blue-700 font-semibold mt-0.5">
+                  {activeCase.structured.location.assignedWard}
+                </div>
               </div>
             </div>
 
-            {/* 6. Semantic Duplicate & Cluster Detection */}
-            <div className="bg-slate-950 border border-slate-800 rounded-lg p-3 flex items-center justify-between">
+            {/* Cluster Link & Draft */}
+            <div className="bg-slate-50 border border-slate-200 rounded p-2.5 flex items-center justify-between">
               <div>
-                <div className="flex items-center gap-1.5 text-slate-400 text-[11px]">
-                  <Layers className="w-3.5 h-3.5 text-purple-400" />
-                  <span>Incident Cluster Link:</span>
+                <div className="flex items-center gap-1 text-[10px] font-mono text-purple-700 font-semibold uppercase">
+                  <Layers className="w-3 h-3" />
+                  <span>Incident Cluster:</span>
                 </div>
-                <div className="text-xs font-medium text-slate-300 mt-0.5">
+                <div className="text-[11px] text-slate-700 font-medium mt-0.5">
                   {activeCase.structured.cluster.status}
                 </div>
               </div>
-              <div className="text-right">
-                <span className="font-mono text-[11px] font-bold text-purple-300 bg-purple-950 px-2 py-0.5 rounded border border-purple-800">
-                  {activeCase.structured.cluster.clusterId}
-                </span>
-              </div>
+              <span className="font-mono text-[10px] font-bold text-purple-800 bg-purple-50 px-2 py-0.5 rounded border border-purple-200">
+                {activeCase.structured.cluster.clusterId}
+              </span>
             </div>
 
-            {/* 7. Operator-Controlled Acknowledgement Draft */}
-            <div className="bg-slate-950 border border-slate-800 rounded-lg p-3 space-y-1.5">
-              <div className="flex items-center justify-between text-slate-400 text-[11px]">
-                <span className="font-semibold text-slate-300">Draft Citizen Acknowledgement (Read-Only):</span>
+            {/* Operator Draft */}
+            <div className="bg-slate-50 border border-slate-200 rounded p-2.5 space-y-1">
+              <div className="flex items-center justify-between text-[10px] font-mono uppercase text-slate-500">
+                <span>Citizen Acknowledgement Draft:</span>
                 <button
                   onClick={handleCopyDraft}
-                  className="flex items-center gap-1 text-[10px] text-indigo-400 hover:text-indigo-300"
+                  className="flex items-center gap-1 text-blue-700 font-semibold hover:underline cursor-pointer"
                 >
                   <Copy className="w-3 h-3" />
-                  {copiedDraft ? 'Copied!' : 'Copy'}
+                  <span>{copiedDraft ? 'Copied' : 'Copy'}</span>
                 </button>
               </div>
-              <div className="p-2.5 rounded bg-slate-900 border border-slate-800 font-sans text-slate-300 text-xs leading-relaxed">
+              <div className="p-2 rounded bg-white border border-slate-200 text-[11px] text-slate-800 leading-snug">
                 "{activeCase.structured.draftResponse}"
               </div>
-              <p className="text-[10px] text-slate-500 italic">
-                * Note: System never sends live SMS/WhatsApp messages. Draft is generated for operator review & copy only.
-              </p>
             </div>
           </div>
         </div>

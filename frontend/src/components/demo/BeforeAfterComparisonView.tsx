@@ -315,26 +315,26 @@ export const BeforeAfterComparisonView: React.FC = () => {
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
             <div className="flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-indigo-400" />
-              <h2 className="text-xl font-bold text-slate-100">
-                AI Pipeline: Before vs After Transformation Demo
+              <Sparkles className="w-5 h-5 text-teal-400" />
+              <h2 className="text-xl font-bold text-slate-100 bg-gradient-to-r from-teal-200 via-sky-200 to-indigo-200 bg-clip-text text-transparent">
+                Nagar Setu: Citizen Voice ➔ Municipal Action Bridge Demo
               </h2>
-              <span className="text-[11px] px-2 py-0.5 rounded font-mono font-semibold bg-indigo-950 text-indigo-300 border border-indigo-800">
-                INTERACTIVE COMPARISON
+              <span className="text-[11px] px-2 py-0.5 rounded-full font-mono font-semibold bg-teal-950 text-teal-300 border border-teal-800/60">
+                BEFORE VS AFTER TRANSFORMATION
               </span>
             </div>
             <p className="text-sm text-slate-400 mt-1 max-w-3xl">
-              Inspect how messy, multilingual, unstructured citizen complaints (raw text, dialect audio, or photos) are converted into structured, audited municipal tickets grounded strictly in the Bhopal gazetteer and partner taxonomy.
+              Inspect how chaotic, multilingual, unstructured citizen complaints (unmasked PII, dialect audio, photos) cross the <span className="text-teal-300 font-semibold">Nagar Setu Bridge</span> into structured, audited municipal tickets grounded strictly in the Bhopal gazetteer and partner taxonomy.
             </p>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="text-xs text-slate-400">Select Test Preset:</span>
+            <span className="text-xs text-slate-400">Select Test Case:</span>
             <select
               value={selectedCaseId}
               onChange={(e) => setSelectedCaseId(e.target.value)}
               aria-label="Select test preset comparison"
-              className="bg-slate-950 border border-slate-700 text-slate-200 text-xs rounded-lg px-3 py-2 font-medium focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+              className="bg-slate-950/80 border border-slate-700 text-slate-200 text-xs rounded-lg px-3 py-2 font-medium focus:ring-1 focus:ring-teal-500 focus:border-teal-500"
             >
               {PRESETS.map((p) => (
                 <option key={p.id} value={p.id}>
@@ -346,22 +346,22 @@ export const BeforeAfterComparisonView: React.FC = () => {
         </div>
 
         {/* Preset Selector Chips */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 mt-5 pt-5 border-t border-slate-800">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 mt-5 pt-5 border-t border-slate-800/80">
           {PRESETS.map((p) => {
             const isSelected = p.id === selectedCaseId;
             return (
               <button
                 key={p.id}
                 onClick={() => setSelectedCaseId(p.id)}
-                className={`text-left p-2.5 rounded-lg border transition-all ${
+                className={`text-left p-3 rounded-xl border transition-all ${
                   isSelected
-                    ? 'bg-indigo-950/70 border-indigo-600 shadow-sm'
-                    : 'bg-slate-950/60 border-slate-800 hover:border-slate-700'
+                    ? 'bg-teal-950/40 border-teal-500/60 shadow-lg shadow-teal-500/10'
+                    : 'bg-slate-950/40 border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/40'
                 }`}
               >
                 <div className="flex items-center justify-between text-[11px] text-slate-400 mb-1">
-                  <span className="font-mono uppercase">{p.channel}</span>
-                  <span className="px-1.5 py-0.2 rounded bg-slate-800 text-slate-300 text-[10px]">
+                  <span className="font-mono uppercase text-teal-400 font-semibold">{p.channel}</span>
+                  <span className="px-2 py-0.5 rounded-full bg-slate-800/80 text-slate-300 text-[10px]">
                     {p.language}
                   </span>
                 </div>

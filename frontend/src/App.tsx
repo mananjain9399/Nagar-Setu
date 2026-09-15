@@ -259,10 +259,17 @@ export function App() {
       )}
 
       {/* Footer */}
-      <footer className="bg-slate-900 border-t border-slate-800 text-slate-500 text-xs py-3 px-4 text-center mt-auto">
-        <p>
-          Bhopal Civic Complaint Intelligence Engine | Zone Operations Console | Full Multimodal & Explainable AI Suite | Synthetic Dataset Environment
-        </p>
+      <footer className="glass-panel text-slate-400 text-xs py-3.5 px-4 text-center mt-auto border-t border-slate-800/80">
+        <div className="flex flex-col sm:flex-row items-center justify-between max-w-7xl mx-auto gap-2">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-teal-400 animate-ping" />
+            <span className="font-semibold text-slate-300">Nagar Setu (नगर सेतु)</span>
+            <span className="text-slate-500">• Bhopal Civic Grievance & Intelligence Bridge</span>
+          </div>
+          <p className="text-slate-500 font-mono text-[11px]">
+            Zone Operations Console • Multimodal AI • Synthetic Triage Environment
+          </p>
+        </div>
       </footer>
     </div>
   );

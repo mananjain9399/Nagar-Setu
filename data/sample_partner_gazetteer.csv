@@ -1,0 +1,6 @@
+ward_id,ward_name,locality_name,aliases,spelling_variants,landmark_terms,latitude,longitude,active
+Ward 12,Arera Colony North,Arera Colony,"Arera;Arera Colony Main;E-Sector Arera","अरेरा कॉलोनी;Arera Coloni","10 No Market;Paryavaran Parisar;E-2 Block",23.2185,77.4325,true
+Ward 34,MP Nagar Zone 1,MP Nagar Zone-1,"MP Nagar Zone 1;Zone 1 MP Nagar","एमपी नगर जोन 1;Maharana Pratap Nagar 1","Press Complex;Dainik Bhaskar;Sargam Cinema",23.2330,77.4350,true
+Ward 80,Kolar Road Sarvadharma,Kolar Road,"Kolar;Kolar Main Road","कोलार रोड;कोलार","Sarvadharma Bridge;Mandakini Square;D-Mart Kolar",23.1850,77.4200,true
+Ward 28,TT Nagar South,TT Nagar,"Tatya Tope Nagar;TT Nagar Market","टीटी नगर;तात्या टोपे नगर","Dussehra Maidan;Platinum Plaza;Mayur Park",23.2380,77.4010,true
+Ward 77,Karond Subzi Mandi,Karond,"Karond Chouraha;Karond Mandi","करोंद;Karound","Karond Mandi Main Gate;Krishi Upaj Mandi",23.3050,77.4100,true

@@ -1,0 +1,21 @@
+external_id,raw_text,ground_truth_dept,ground_truth_cat,ground_truth_urgency,ground_truth_locality,ground_truth_ward,is_duplicate,master_ref
+TEST-001,"MP Nagar zone 1 main road par 2 feet gehra gaddha ho gaya hai bike wale gir rahe hain",Roads & Civil Infrastructure,Pothole Repair,HIGH,MP Nagar Zone-1,Ward 34,false,
+TEST-002,"Zone 1 MP nagar me bada pothole hai gadi gir rahi hai kripya jaldi banaye",Roads & Civil Infrastructure,Pothole Repair,HIGH,MP Nagar Zone-1,Ward 34,true,TEST-001
+TEST-003,"10 no market Arera colony me subah se drinking water supply band hai koi pani nahi aa raha",Water Works & Supply,Low Water Pressure,HIGH,Arera Colony,Ward 12,false,
+TEST-004,"Water supply not coming in 10 number market Arera Colony since 6 AM today",Water Works & Supply,Low Water Pressure,HIGH,Arera Colony,Ward 12,true,TEST-003
+TEST-005,"Kolar road sarvadharma pul ke paas main pipeline burst ho gayi hai pura road jalmagna hai",Water Works & Supply,Pipeline Burst / Leakage,CRITICAL,Kolar Road,Ward 80,false,
+TEST-006,"Bhadbhada road par streetlight pole fuse ho gaya hai raat ko pura andhera rehta hai",Street Lighting & Electricals,Streetlight Not Glowing,LOW,Bhadbhada Road,Ward 24,false,
+TEST-007,"Hamidia road Dawa bazar ke samne kachre ka dher laga hai 4 din se kachra gaadi nahi aayi",Solid Waste & Sanitation,Illegal Roadside Dumping,MEDIUM,Hamidia Road,Ward 18,false,
+TEST-008,"Shahpura lake sector B open chamber overflow kar raha hai ganda pani raste par beh raha hai",Drainage & Sewerage Operations,Sewage Backflow in Residential Area,HIGH,Shahpura,Ward 45,false,
+TEST-009,"Dussehra maidan TT nagar me ped ki badi daal gir gayi hai rasta block ho gaya hai",Parks, Gardens & Horticulture,Dangerous / Fallen Tree Branch,MEDIUM,TT Nagar,Ward 32,false,
+TEST-010,"Karond mandi road par transformer ke paas live electrical wire latak raha hai sparks nikal rahe hain",Street Lighting & Electricals,Hanging / Exposed Cable,CRITICAL,Karond,Ward 72,false,
+TEST-011,"near unknown hill junction far away from city no landmark visible",General Civic Services,Unclassified Triage,LOW,Unmapped / Unknown,No Ward Inferred,false,
+TEST-012,"Hoshangabad road near Aashima mall drainage nali blocked hai badboo se log pareshan hain",Drainage & Sewerage Operations,Stormwater Drain Clogged,MEDIUM,Hoshangabad Road,Ward 52,false,
+TEST-013,"Chetak bridge par pavement tiles tooti hui hain pedestrians ko chalne me dikkat hai",Roads & Civil Infrastructure,Damaged Footpath / Pavement,LOW,Chetak Bridge,Ward 28,false,
+TEST-014,"Bittan market vegetable market area me daily garbage clearing nahi ho rahi",Solid Waste & Sanitation,Garbage Bin Overflow,MEDIUM,Bittan Market,Ward 48,false,
+TEST-015,"Arera colony E-2 block sewage manhole cover missing hai bachhe khelte hain bura haadsa ho sakta hai",Drainage & Sewerage Operations,Open / Missing Manhole Cover,CRITICAL,Arera Colony,Ward 12,false,
+TEST-016,"Govindpura industrial area gate 2 pipeline leakage past 10 days clean water wasting continuously",Water Works & Supply,Pipeline Burst / Leakage,HIGH,Govindpura,Ward 60,false,
+TEST-017,"Bairagarh main market chauraha par streetlight glowing nahi ho rahi",Street Lighting & Electricals,Streetlight Not Glowing,MEDIUM,Bairagarh,Ward 04,false,
+TEST-018,"Bairagarh cloth market chauraha street light band hai andhera hai",Street Lighting & Electricals,Streetlight Not Glowing,MEDIUM,Bairagarh,Ward 04,true,TEST-017
+TEST-019,"Ayodhya bypass road par construction debris malba road par fek diya hai kisi ne",Solid Waste & Sanitation,Debris / Malba Removal,LOW,Ayodhya Bypass,Ward 68,false,
+TEST-020,"New market top n town ke paas pipeline burst water leak ho raha hai",Water Works & Supply,Pipeline Burst / Leakage,LOW,New Market,Ward 30,false,

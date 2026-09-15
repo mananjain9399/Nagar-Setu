@@ -1,0 +1,212 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Department {
+  id          String     @id @default(uuid())
+  name        String
+  code        String     @unique
+  active      Boolean    @default(true)
+  description String?
+  categories  Category[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+model Category {
+  id           String     @id @default(uuid())
+  code         String     @unique
+  name         String
+  description  String?
+  departmentId String
+  department   Department @relation(fields: [departmentId], references: [id], onDelete: Cascade)
+  active       Boolean    @default(true)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@index([departmentId])
+  @@index([code])
+}
+
+model Ward {
+  id          String     @id @default(uuid())
+  wardNumber  String     @unique // e.g. "Ward 12", "Ward 28", "Ward 47"
+  wardName    String     // e.g. "Arera Colony South"
+  zone        String?    // e.g. "Zone 8", "Zone 10"
+  active      Boolean    @default(true)
+  localities  Locality[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  @@index([wardNumber])
+}
+
+model Locality {
+  id               String    @id @default(uuid())
+  name             String    // e.g. "Arera Colony"
+  wardId           String?
+  ward             Ward?     @relation(fields: [wardId], references: [id], onDelete: SetNull)
+  aliases          String[]  // ["Arera", "Arera Colony Main Road"]
+  spellingVariants String[]  // ["अरेरा कॉलोनी", "Arera Coloni"]
+  landmarkTerms    String[]  // ["E-3 Sector", "E-2 Block", "Paryavaran Parisar"]
+  latitude         Float?
+  longitude        Float?
+  active           Boolean   @default(true)
+  isSynthetic      Boolean   @default(true) // Explicit synthetic demo marker
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  @@index([name])
+  @@index([wardId])
+}
+
+model DuplicateCluster {
+  id                 String             @id @default(uuid())
+  clusterName        String
+  primaryComplaintId String?            // Master complaint ID
+  similarityScore    Float?             // e.g. 0.93
+  reason             String?            @db.Text
+  status             String             @default("ACTIVE") // "ACTIVE", "MERGED", "RESOLVED"
+  complaints         Complaint[]
+  processingResults  ProcessingResult[]
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+}
+
+model AcknowledgementDraft {
+  id           String    @id @default(uuid())
+  complaintId  String
+  complaint    Complaint @relation(fields: [complaintId], references: [id], onDelete: Cascade)
+  channel      String    // "SMS", "WHATSAPP", "APP_NOTIFICATION", "OFFICIAL_MEMO"
+  language     String    @default("hi-en") // "hi", "en", "hi-en"
+  templateCode String?
+  draftedText  String    @db.Text
+  status       String    @default("DRAFT") // "DRAFT", "OPERATOR_APPROVED", "REVISED"
+  editedBy     String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@index([complaintId])
+}
+
+model ProcessingResult {
+  id                    String            @id @default(uuid())
+  complaintId           String            @unique
+  complaint             Complaint         @relation(fields: [complaintId], references: [id], onDelete: Cascade)
+  detectedLanguage      String?
+  extractedLocality     String?
+  extractedWard         String?
+  classifiedDepartment  String?
+  classifiedCategory    String?
+  assessedUrgency       String?
+  confidenceScore       Float?
+  isPotentialDuplicate  Boolean           @default(false)
+  duplicateClusterId    String?
+  duplicateCluster      DuplicateCluster? @relation(fields: [duplicateClusterId], references: [id], onDelete: SetNull)
+  reasoningSummary      String?           @db.Text
+  entitiesExtracted     Json?
+  createdAt             DateTime          @default(now())
+  updatedAt             DateTime          @updatedAt
+
+  @@index([duplicateClusterId])
+}
+
+model Complaint {
+  id                  String                 @id @default(uuid())
+  externalId          String?                @unique
+  sourceChannel       String                 // e.g. "CM_HELPLINE_181", "MUNICIPAL_APP", "ELECTED_REP", "SOCIAL_MEDIA", "MANUAL_IMPORT"
+  rawText             String                 @db.Text
+  mediaType           String?                // "IMAGE", "AUDIO", "DOCUMENT", "NONE"
+  mediaUrl            String?                // Reference / filename / mock url
+  caption             String?
+  language            String?                @default("hi-en") // "hi", "en", "hi-en"
+  transcription       String?                @db.Text
+  transcriptionConfidence Float?
+  detectedVisionSignals   String[]           // ["POTHOLE", "GARBAGE", "WATER_LEAK", etc.]
+  safetySignals       String[]               // ["EXPOSED_LIVE_WIRE", "ROAD_CAVE_IN", etc.]
+  serviceOutageSignals String[]              // ["NO_WATER_SUPPLY", "POWER_OUTAGE", etc.]
+  durationText        String?                // Extracted duration phrase e.g. "past 7 days"
+  isResolved          Boolean                @default(false)
+  resolvedAt          DateTime?
+  hasPII              Boolean                @default(false)
+  piiDetails          Json?                  // Flagged and masked PII entities
+  department          String?
+  category            String?
+  urgency             String                 @default("MEDIUM") // "LOW", "MEDIUM", "HIGH", "CRITICAL"
+  ward                String?                // e.g. "Ward 24", "Ward 45"
+  locality            String?                // e.g. "MP Nagar Zone-1", "Kolar Road", "Arera Colony"
+  createdAt           DateTime               @default(now())
+  processedAt         DateTime?
+  processingStatus    String                 @default("UNPROCESSED") // "UNPROCESSED", "PROCESSED", "REQUIRES_REVIEW", "DUPLICATE"
+  confidence          Float?                 // 0.0 to 1.0
+  requiresHumanReview Boolean                @default(false)
+  duplicateStatus     String                 @default("UNIQUE") // "UNIQUE", "POSSIBLE_DUPLICATE", "CONFIRMED_DUPLICATE"
+  duplicateOfId       String?
+  duplicateClusterId  String?
+  duplicateCluster    DuplicateCluster?      @relation(fields: [duplicateClusterId], references: [id], onDelete: SetNull)
+  explanation         String?                @db.Text
+  structuredData      Json?                  // Key extraction, entities, landmarks, SLA metrics
+  isSynthetic         Boolean                @default(true) // STRICT: identifies synthetic test records
+
+  processingRecords      ComplaintProcessing[]
+  reviews                OperatorReview[]
+  acknowledgementDrafts  AcknowledgementDraft[]
+  processingResult       ProcessingResult?
+
+  @@index([department])
+  @@index([category])
+  @@index([urgency])
+  @@index([ward])
+  @@index([sourceChannel])
+  @@index([processingStatus])
+  @@index([requiresHumanReview])
+  @@index([duplicateStatus])
+  @@index([duplicateClusterId])
+  @@index([isResolved])
+  @@index([hasPII])
+}
+
+model ComplaintProcessing {
+  id            String    @id @default(uuid())
+  complaintId   String
+  complaint     Complaint @relation(fields: [complaintId], references: [id], onDelete: Cascade)
+  stage         String    // "INGESTION", "LANGUAGE_IDENTIFICATION", "EXTRACTION", "DUPLICATE_DETECTION", "CLASSIFICATION"
+  status        String    // "PENDING", "COMPLETED", "FAILED"
+  outputSummary String?   @db.Text
+  confidence    Float?
+  createdAt     DateTime  @default(now())
+
+  @@index([complaintId])
+}
+
+model OperatorReview {
+  id             String    @id @default(uuid())
+  complaintId    String
+  complaint      Complaint @relation(fields: [complaintId], references: [id], onDelete: Cascade)
+  reviewedBy     String    // e.g. "Operator-BPL-Zone4"
+  decision       String    // "ACCEPTED", "REJECTED", "MODIFIED", "ESCALATED", "MARKED_DUPLICATE"
+  comments       String?   @db.Text
+  modifiedFields Json?     // Any overridden fields: { department, category, urgency, ward, locality }
+  createdAt      DateTime  @default(now())
+
+  @@index([complaintId])
+}
+
+model AuditLog {
+  id          String    @id @default(uuid())
+  complaintId String?
+  action      String    // "INTAKE", "AI_PROCESSING", "OPERATOR_REVIEW", "ACKNOWLEDGEMENT_APPROVAL", "CLUSTER_MERGE"
+  actor       String    // "SYSTEM_AI_ENGINE", "Operator-BPL-ZoneHQ", etc.
+  previousVal Json?
+  newVal      Json?
+  details     String?   @db.Text
+  createdAt   DateTime  @default(now())
+
+  @@index([complaintId])
+  @@index([action])
+}

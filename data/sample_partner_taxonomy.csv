@@ -1,0 +1,12 @@
+department_code,department_name,category_code,category_name,description,active
+WATER_WORKS,Water Works & Supply,WW_PIPE_BURST,Pipeline Burst / Major Leakage,High volume water line rupture or street flooding,true
+WATER_WORKS,Water Works & Supply,WW_CONTAM,Turbid / Contaminated Water,Potable water contamination with biological or sewage smell,true
+WATER_WORKS,Water Works & Supply,WW_LOW_PRES,Low Water Pressure,Insufficient terminal pressure in household connections,true
+SOLID_WASTE,Solid Waste & Sanitation,SW_OVERFLOW,Garbage Bin Overflow,Secondary dumper or roadside container overflow,true
+SOLID_WASTE,Solid Waste & Sanitation,SW_DOOR_MISSED,Missed Door-to-Door Tipper,Garbage vehicle absent on designated ward route,true
+ROADS_INFRA,Roads & Civil Infrastructure,RD_POTHOLE,Hazardous Pothole Cluster,Carriage way surface depression posing accident risk,true
+ROADS_INFRA,Roads & Civil Infrastructure,RD_DIVIDER,Damaged Median / Divider,Broken concrete curb or unpainted divider block,true
+STREET_LIGHTING,Street Lighting & Electricals,SL_OUTAGE,Dark Spot / Light Outage,Multiple street lights failed along main street,true
+STREET_LIGHTING,Street Lighting & Electricals,SL_EXPOSED_WIRE,Live / Exposed Electrical Cable,Hazardous sparking cable or low hanging high tension line,true
+DRAINAGE_SEWER,Drainage & Sewerage Operations,DS_BACKFLOW,Residential Sewage Backflow,Choked gravity sewer entering home or building basement,true
+DRAINAGE_SEWER,Drainage & Sewerage Operations,DS_MANHOLE,Open or Missing Manhole Cover,Chamber slab cracked or dislodged on road,true

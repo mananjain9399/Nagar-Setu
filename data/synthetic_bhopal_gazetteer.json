@@ -1,0 +1,257 @@
+{
+  "_meta": {
+    "disclaimer": "SYNTHETIC DEMO GAZETTEER DATASET FOR DEVELOPMENT AND EVALUATION ONLY. REPRESENTS ARTIFICIAL MAPPINGS FOR TESTING BHOPAL ZONE LOGIC. MUST BE REPLACED WITH PARTNER'S OFFICIAL REVISED MUNICIPAL GAZETTEER UPON PRODUCTION INTEGRATION.",
+    "version": "1.0-synthetic",
+    "city": "Bhopal",
+    "state": "Madhya Pradesh"
+  },
+  "wards": [
+    {
+      "wardNumber": "Ward 12",
+      "wardName": "Arera Colony North & 10 No. Market",
+      "zone": "Zone 8",
+      "active": true,
+      "localities": [
+        {
+          "name": "Arera Colony",
+          "aliases": ["Arera", "Arera Colony Main Road", "E-Sector Arera", "Old Arera"],
+          "spellingVariants": ["अरेरा कॉलोनी", "अरेरा कालोनी", "Arera Coloni", "Arera Colony Bhopal"],
+          "landmarkTerms": ["10 No Market", "10 Number Stop", "Paryavaran Parisar", "Campian School", "E-1", "E-2 Block"],
+          "latitude": 23.2185,
+          "longitude": 77.4325,
+          "active": true
+        }
+      ]
+    },
+    {
+      "wardNumber": "Ward 47",
+      "wardName": "Arera Colony South & Char Imli",
+      "zone": "Zone 8",
+      "active": true,
+      "localities": [
+        {
+          "name": "Char Imli",
+          "aliases": ["Charimli", "Char Imli Officers Colony"],
+          "spellingVariants": ["चार इमली", "चार इमली भोपाल"],
+          "landmarkTerms": ["Officers Mess", "Char Imli Park"],
+          "latitude": 23.2250,
+          "longitude": 77.4270,
+          "active": true
+        },
+        {
+          "name": "Arera Colony E-3",
+          "aliases": ["E-3 Arera", "Arera Colony Sector E3"],
+          "spellingVariants": ["अरेरा कॉलोनी ई-3", "Arera E3"],
+          "landmarkTerms": ["E-3 Market", "Bansal Hospital Circle"],
+          "latitude": 23.2130,
+          "longitude": 77.4350,
+          "active": true
+        }
+      ]
+    },
+    {
+      "wardNumber": "Ward 34",
+      "wardName": "MP Nagar Zone 1 & Press Complex",
+      "zone": "Zone 10",
+      "active": true,
+      "localities": [
+        {
+          "name": "MP Nagar Zone-1",
+          "aliases": ["MP Nagar Zone 1", "MP Nagar 1", "Zone 1 MP Nagar", "Maharana Pratap Nagar 1"],
+          "spellingVariants": ["एमपी नगर जोन-1", "एमपी नगर जोन 1", "महाराणा प्रताप नगर"],
+          "landmarkTerms": ["Press Complex", "Dainik Bhaskar Office", "Sargam Cinema", "DB City Mall Side"],
+          "latitude": 23.2330,
+          "longitude": 77.4350,
+          "active": true
+        }
+      ]
+    },
+    {
+      "wardNumber": "Ward 46",
+      "wardName": "MP Nagar Zone 2 & Habibganj Road",
+      "zone": "Zone 10",
+      "active": true,
+      "localities": [
+        {
+          "name": "MP Nagar Zone-2",
+          "aliases": ["MP Nagar Zone 2", "MP Nagar 2", "Zone 2 MP Nagar"],
+          "spellingVariants": ["एमपी नगर जोन-2", "एमपी नगर जोन 2"],
+          "landmarkTerms": ["Chetak Bridge", "Chetak Bridge Incline", "Jyoti Talkies", "Manohar Dairy MP Nagar"],
+          "latitude": 23.2355,
+          "longitude": 77.4390,
+          "active": true
+        }
+      ]
+    },
+    {
+      "wardNumber": "Ward 80",
+      "wardName": "Kolar Road Sarvadharma & Mandakini",
+      "zone": "Zone 18",
+      "active": true,
+      "localities": [
+        {
+          "name": "Kolar Road",
+          "aliases": ["Kolar", "Kolar Main Road", "Kolar Suburb"],
+          "spellingVariants": ["कोलार रोड", "कोलार", "Kolar Rd"],
+          "landmarkTerms": ["Sarvadharma Bridge", "Sarvadharma Flyover", "Mandakini Square", "D-Mart Kolar", "Chuna Bhatti Kolar"],
+          "latitude": 23.1850,
+          "longitude": 77.4200,
+          "active": true
+        }
+      ]
+    },
+    {
+      "wardNumber": "Ward 28",
+      "wardName": "TT Nagar & Roshanpura",
+      "zone": "Zone 6",
+      "active": true,
+      "localities": [
+        {
+          "name": "TT Nagar",
+          "aliases": ["Tatya Tope Nagar", "TT Nagar Market", "South TT Nagar"],
+          "spellingVariants": ["टीटी नगर", "तात्या टोपे नगर", "TT Nagar Bhopal"],
+          "landmarkTerms": ["Dussehra Maidan", "Platinum Plaza", "Mayur Park", "Apex Bank Circle", "Roshanpura Square"],
+          "latitude": 23.2380,
+          "longitude": 77.4010,
+          "active": true
+        }
+      ]
+    },
+    {
+      "wardNumber": "Ward 77",
+      "wardName": "Karond Mandi & Berasia Road",
+      "zone": "Zone 17",
+      "active": true,
+      "localities": [
+        {
+          "name": "Karond",
+          "aliases": ["Karond Chouraha", "Karond Subzi Mandi", "Krishi Upaj Mandi Karond"],
+          "spellingVariants": ["करोंद", "करोंद मंडी", "Karound"],
+          "landmarkTerms": ["Karond Mandi Main Gate", "Navin Gala", "Berasia Road Cross", "People's Mall Road"],
+          "latitude": 23.3050,
+          "longitude": 77.4100,
+          "active": true
+        }
+      ]
+    },
+    {
+      "wardNumber": "Ward 04",
+      "wardName": "Bairagarh / Sant Hirdaram Nagar",
+      "zone": "Zone 1",
+      "active": true,
+      "localities": [
+        {
+          "name": "Bairagarh",
+          "aliases": ["Sant Hirdaram Nagar", "Bairagarh Town", "Hirdaram Nagar"],
+          "spellingVariants": ["बैरागढ़", "संत हिरदाराम नगर", "Bairagadh", "Sehore Naka Bairagarh"],
+          "landmarkTerms": ["Main Cloth Market", "Sant Hirdaram Nagar Railway Underpass", "Chanchal Chouraha"],
+          "latitude": 23.2720,
+          "longitude": 77.3410,
+          "active": true
+        }
+      ]
+    },
+    {
+      "wardNumber": "Ward 52",
+      "wardName": "Shahpura Lake & Sector-A/B/C",
+      "zone": "Zone 11",
+      "active": true,
+      "localities": [
+        {
+          "name": "Shahpura",
+          "aliases": ["Shahpura Sector A", "Shahpura Sector B", "Shahpura Lake Area"],
+          "spellingVariants": ["शाहपुरा", "शाहपुरा भोपाल", "Shahpura Colony"],
+          "landmarkTerms": ["Shahpura Lake Promenade", "Shahpura Lake Gate 3", "Manisha Market", "Bansal Hospital Road"],
+          "latitude": 23.2050,
+          "longitude": 77.4420,
+          "active": true
+        }
+      ]
+    },
+    {
+      "wardNumber": "Ward 58",
+      "wardName": "Govindpura Industrial Estate",
+      "zone": "Zone 13",
+      "active": true,
+      "localities": [
+        {
+          "name": "Govindpura",
+          "aliases": ["Govindpura Industrial Area", "Govindpura Sector C", "BHEL Govindpura"],
+          "spellingVariants": ["गोविंदपुरा", "गोविंदपुरा इंडस्ट्रियल एरिया"],
+          "landmarkTerms": ["Industrial Area Sector C", "Govindpura Community Centre", "ITI Bhopal Gate"],
+          "latitude": 23.2550,
+          "longitude": 77.4580,
+          "active": true
+        }
+      ]
+    },
+    {
+      "wardNumber": "Ward 31",
+      "wardName": "New Market & Malviya Nagar",
+      "zone": "Zone 7",
+      "active": true,
+      "localities": [
+        {
+          "name": "New Market",
+          "aliases": ["New Market Bhopal", "Malviya Nagar New Market"],
+          "spellingVariants": ["न्यू मार्केट", "नया बाजार"],
+          "landmarkTerms": ["Top N Town Square", "TT Nagar Stadium Gate", "Rangmahal Cinema Circle", "Bhopal Haat"],
+          "latitude": 23.2350,
+          "longitude": 77.4080,
+          "active": true
+        }
+      ]
+    },
+    {
+      "wardNumber": "Ward 22",
+      "wardName": "Jahangirabad & Jinsi",
+      "zone": "Zone 5",
+      "active": true,
+      "localities": [
+        {
+          "name": "Jahangirabad",
+          "aliases": ["Jahangirabad Old City", "Jinsi Jahangirabad"],
+          "spellingVariants": ["जहांगीराबाद", "जहांगीराबाद भोपाल"],
+          "landmarkTerms": ["Jahangirabad Police Station Circle", "Lily Cinema Square", "Church Road Jahangirabad"],
+          "latitude": 23.2500,
+          "longitude": 77.4180,
+          "active": true
+        }
+      ]
+    },
+    {
+      "wardNumber": "Ward 53",
+      "wardName": "Hoshangabad Road & Bagmugaliya",
+      "zone": "Zone 12",
+      "active": true,
+      "localities": [
+        {
+          "name": "Hoshangabad Road",
+          "aliases": ["Narmadapuram Road", "Hoshangabad Highway Corridor"],
+          "spellingVariants": ["होशंगाबाद रोड", "नर्मदापुरम रोड"],
+          "landmarkTerms": ["Aashima Mall", "RRL Trisection", "Barkatullah University Gate", "Danish Kunj Cross"],
+          "latitude": 23.1920,
+          "longitude": 77.4600,
+          "active": true
+        }
+      ]
+    },
+    {
+      "wardNumber": "Ward 64",
+      "wardName": "Ayodhya Bypass & Damkheda",
+      "zone": "Zone 14",
+      "active": true,
+      "localities": [
+        {
+          "name": "Ayodhya Bypass",
+          "aliases": ["Ayodhya Nagar", "Ayodhya Bypass Road"],
+          "spellingVariants": ["अयोध्या बायपास", "अयोध्या नगर"],
+          "landmarkTerms": ["St. Joseph School Ayodhya Bypass", "Minal Residency Gate", "Bhanpur Roundabout"],
+          "latitude": 23.2800,
+          "longitude": 77.4650,
+          "active": true
+        }
+      ]
+    }
+  ]
+}

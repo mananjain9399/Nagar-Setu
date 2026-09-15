@@ -1,0 +1,127 @@
+{
+  "_meta": {
+    "disclaimer": "PROVISIONAL PLACEHOLDER TAXONOMY FOR DEVELOPMENT & DEMONSTRATION ONLY. DO NOT TREAT AS OFFICIAL GOVERNMENT TAXONOMY. REPLACE OR EXTEND WITH PARTNER'S OFFICIAL TAXONOMY UPON INTEGRATION.",
+    "version": "1.0.0-provisional",
+    "lastUpdated": "2026-09-15"
+  },
+  "departments": [
+    {
+      "code": "ROADS_INFRA",
+      "name": "Roads & Civil Infrastructure",
+      "description": "Provisional: Potholes, road resurfacing, footpath, divider maintenance",
+      "categories": [
+        "Pothole Repair",
+        "Road Resurfacing",
+        "Damaged Footpath / Pavement",
+        "Speed Breaker Maintenance",
+        "Waterlogged Road Surface"
+      ]
+    },
+    {
+      "code": "WATER_WORKS",
+      "name": "Water Works & Supply",
+      "description": "Provisional: Potable supply lines, low pressure, contamination, tanker requests",
+      "categories": [
+        "Pipeline Burst / Leakage",
+        "Contaminated / Turbid Water",
+        "Low Water Pressure",
+        "Irregular Supply Timing",
+        "Water Tanker Emergency"
+      ]
+    },
+    {
+      "code": "SOLID_WASTE",
+      "name": "Solid Waste & Sanitation",
+      "description": "Provisional: Door-to-door collection, secondary dump overflow, sweeping",
+      "categories": [
+        "Garbage Bin Overflow",
+        "Missed Door-to-Door Collection",
+        "Illegal Roadside Dumping",
+        "Street Sweeping Grievance",
+        "Debris / Malba Removal"
+      ]
+    },
+    {
+      "code": "DRAINAGE_SEWER",
+      "name": "Drainage & Sewerage Operations",
+      "description": "Provisional: Stormwater drain desilting, sewer overflow, open manholes",
+      "categories": [
+        "Choked Sewer Line",
+        "Open / Missing Manhole Cover",
+        "Stormwater Drain Clogged",
+        "Sewage Backflow in Residential Area"
+      ]
+    },
+    {
+      "code": "STREET_LIGHTING",
+      "name": "Street Lighting & Electricals",
+      "description": "Provisional: Non-functional poles, dark spots, hanging wires",
+      "categories": [
+        "Streetlight Not Glowing",
+        "Streetlight Glowing in Daytime",
+        "Hanging / Exposed Cable",
+        "Damaged Electric Pole"
+      ]
+    },
+    {
+      "code": "PUBLIC_HEALTH",
+      "name": "Public Health & Vector Control",
+      "description": "Provisional: Fogging, mosquito breeding, dead animal clearance",
+      "categories": [
+        "Mosquito Fogging Request",
+        "Stagnant Water / Vector Breeding",
+        "Dead Animal Carcass Removal",
+        "Meat Shop Hygiene Grievance"
+      ]
+    },
+    {
+      "code": "PARKS_GARDENS",
+      "name": "Parks, Gardens & Horticulture",
+      "description": "Provisional: Tree pruning, green waste, playground equipment",
+      "categories": [
+        "Dangerous / Fallen Tree Branch",
+        "Park Maintenance & Cleanliness",
+        "Damaged Children Play Equipment"
+      ]
+    },
+    {
+      "code": "ANIMAL_CONTROL",
+      "name": "Stray Animal Management",
+      "description": "Provisional: Cattle menace, aggressive canine packs",
+      "categories": [
+        "Stray Cattle on Major Thoroughfare",
+        "Aggressive Dog Pack / Dog Bite Risk",
+        "Injured Animal Rescue"
+      ]
+    },
+    {
+      "code": "ENCROACHMENT",
+      "name": "Anti-Encroachment & Removal",
+      "description": "Provisional: Footpath blockage, illegal kiosks",
+      "categories": [
+        "Footpath Encroachment",
+        "Illegal Construction in Public RoW",
+        "Unauthorized Temporary Stalls"
+      ]
+    },
+    {
+      "code": "FIRE_EMERGENCY",
+      "name": "Fire & Emergency Preparedness",
+      "description": "Provisional: Fire safety hazards, obstructed emergency lanes",
+      "categories": [
+        "Obstructed Emergency Access Route",
+        "Hazardous Combustible Material Storage"
+      ]
+    },
+    {
+      "code": "GENERAL_CIVIC",
+      "name": "General Civic Services",
+      "description": "Provisional: Unclassified civic issues requiring initial triage",
+      "categories": [
+        "Public Toilet Maintenance",
+        "Community Hall Grievance",
+        "Unclassified Triage"
+      ]
+    }
+  ]
+}

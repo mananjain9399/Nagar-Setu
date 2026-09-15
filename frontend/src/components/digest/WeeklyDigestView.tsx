@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { api } from '../../services/api';
+import { api, API_BASE_URL } from '../../services/api';
 import { WeeklyDigestResult } from '../../types';
 import {
   FileSpreadsheet,
@@ -36,11 +36,11 @@ export const WeeklyDigestView: React.FC<WeeklyDigestViewProps> = () => {
   };
 
   const handleExportCSV = () => {
-    window.open('http://localhost:5000/api/analytics/export/csv', '_blank');
+    window.open(`${API_BASE_URL}/analytics/export/csv`, '_blank');
   };
 
   const handleExportJSON = () => {
-    window.open('http://localhost:5000/api/analytics/export/json', '_blank');
+    window.open(`${API_BASE_URL}/analytics/export/json`, '_blank');
   };
 
   const handlePrint = () => {

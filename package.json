@@ -1,17 +1,31 @@
 {
   "name": "bhopal-civic-complaint-intelligence-engine",
   "version": "1.0.0",
-  "description": "Bhopal Civic Complaint Intelligence Engine - Phase 1 Operator System",
+  "description": "Bhopal Civic Complaint Intelligence Engine - Operator System",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
   "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
     "dev:backend": "npm --prefix backend run dev",
     "dev:frontend": "npm --prefix frontend run dev",
     "build:backend": "npm --prefix backend run build",
     "build:frontend": "npm --prefix frontend run build",
-    "build": "npm run build:backend && npm run build:frontend",
+    "build": "npm --prefix backend run build && npm --prefix frontend run build",
     "db:seed": "npm --prefix backend run db:seed",
-    "prisma:push": "npm --prefix backend run prisma:push"
+    "prisma:push": "npm --prefix backend run prisma:push",
+    "prisma:generate": "npm --prefix backend run prisma:generate"
   },
-  "keywords": ["civic", "bhopal", "complaint-intelligence", "operator-dashboard", "municipal"],
+  "keywords": [
+    "civic",
+    "bhopal",
+    "nagar-setu",
+    "complaint-intelligence",
+    "operator-dashboard",
+    "municipal"
+  ],
   "author": "Bhopal Municipal Corporation Zone Operations",
   "license": "UNLICENSED"
 }

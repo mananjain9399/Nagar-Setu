@@ -22,8 +22,7 @@ export const MetricGrid: React.FC<MetricGridProps> = ({ stats, onFilterClick }) 
       value: stats.totalComplaints,
       subtext: 'Active dataset export',
       icon: FileText,
-      color: 'text-cyan-400',
-      accentBorder: 'hover:border-cyan-400/50',
+      iconBg: 'bg-blue-50 text-blue-600',
       action: () => onFilterClick && onFilterClick('clear', ''),
     },
     {
@@ -32,8 +31,7 @@ export const MetricGrid: React.FC<MetricGridProps> = ({ stats, onFilterClick }) 
       value: stats.unprocessedCount,
       subtext: 'Awaiting triage',
       icon: Clock,
-      color: 'text-slate-300',
-      accentBorder: 'hover:border-slate-400/50',
+      iconBg: 'bg-slate-100 text-slate-600',
       action: () => onFilterClick && onFilterClick('processingStatus', 'UNPROCESSED'),
     },
     {
@@ -42,8 +40,7 @@ export const MetricGrid: React.FC<MetricGridProps> = ({ stats, onFilterClick }) 
       value: stats.processedCount,
       subtext: 'Structured & routed',
       icon: CheckCircle2,
-      color: 'text-emerald-400',
-      accentBorder: 'hover:border-emerald-400/50',
+      iconBg: 'bg-emerald-50 text-emerald-600',
       action: () => onFilterClick && onFilterClick('processingStatus', 'PROCESSED'),
     },
     {
@@ -52,18 +49,16 @@ export const MetricGrid: React.FC<MetricGridProps> = ({ stats, onFilterClick }) 
       value: stats.possibleDuplicatesCount,
       subtext: 'Cluster matched',
       icon: Copy,
-      color: 'text-indigo-400',
-      accentBorder: 'hover:border-indigo-400/50',
+      iconBg: 'bg-indigo-50 text-indigo-600',
       action: () => onFilterClick && onFilterClick('duplicateStatus', 'POSSIBLE_DUPLICATE'),
     },
     {
       id: 'review',
       label: 'HUMAN REVIEW',
       value: stats.requiresHumanReviewCount,
-      subtext: 'Operator decision required',
+      subtext: 'Operator decision needed',
       icon: AlertTriangle,
-      color: 'text-amber-400',
-      accentBorder: 'hover:border-amber-400/50',
+      iconBg: 'bg-amber-50 text-amber-600',
       alert: true,
       action: () => onFilterClick && onFilterClick('reviewStatus', 'REQUIRES_HUMAN_REVIEW'),
     },
@@ -73,8 +68,7 @@ export const MetricGrid: React.FC<MetricGridProps> = ({ stats, onFilterClick }) 
       value: stats.criticalOrHighUrgencyCount,
       subtext: `${stats.criticalCount} Critical, ${stats.highCount} High priority`,
       icon: Flame,
-      color: 'text-rose-400',
-      accentBorder: 'hover:border-rose-400/50',
+      iconBg: 'bg-rose-50 text-rose-600',
       alert: true,
       action: () => onFilterClick && onFilterClick('urgency', 'CRITICAL'),
     },
@@ -88,25 +82,27 @@ export const MetricGrid: React.FC<MetricGridProps> = ({ stats, onFilterClick }) 
           <div
             key={c.id}
             onClick={c.action}
-            className={`dual-card p-4 rounded-xl border border-white/10 flex flex-col justify-between cursor-pointer transition-all ${c.accentBorder} shadow-lg`}
+            className="bw-card p-4 rounded-xl flex flex-col justify-between cursor-pointer transition-all shadow-sm group"
           >
             <div>
-              {/* Card Header: Label & Icon aligned */}
+              {/* Card Header */}
               <div className="flex items-center justify-between gap-2 mb-2">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 group-hover:text-blue-600 transition-colors">
                   {c.label}
                 </span>
-                <Icon className={`w-4 h-4 ${c.color} flex-shrink-0`} />
+                <div className={`p-1.5 rounded-lg ${c.iconBg} transition-transform group-hover:scale-110`}>
+                  <Icon className="w-3.5 h-3.5" />
+                </div>
               </div>
 
-              {/* Crisp White KPI */}
-              <div className="text-3xl font-extrabold font-mono text-white tracking-tight">
+              {/* High Contrast Metric Value */}
+              <div className="text-3xl font-black font-mono text-slate-900 tracking-tight">
                 {c.value}
               </div>
             </div>
 
             {/* Subtext */}
-            <p className="text-[11px] font-medium text-slate-400 mt-2.5 pt-2 border-t border-white/5 truncate">
+            <p className="text-[11px] font-medium text-slate-500 mt-2.5 pt-2 border-t border-slate-100 truncate">
               {c.subtext}
             </p>
           </div>

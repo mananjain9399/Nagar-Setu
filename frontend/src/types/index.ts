@@ -259,6 +259,7 @@ export interface ComplaintFilterQuery {
   duplicateStatus?: string;
   reviewStatus?: string;
   processingStatus?: string;
+  mediaType?: string;
   search?: string;
   page?: number;
   limit?: number;

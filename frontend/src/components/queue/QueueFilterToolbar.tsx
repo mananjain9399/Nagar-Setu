@@ -22,9 +22,9 @@ export const QueueFilterToolbar: React.FC<QueueFilterToolbarProps> = ({
   totalFiltered,
 }) => {
   return (
-    <div className="bg-slate-900 border border-slate-800 rounded-lg p-3.5 space-y-3 shadow-sm">
+    <div className="bw-card rounded-xl p-4 space-y-3">
       {/* Top Search and Status Line */}
-      <div className="flex flex-col sm:flex-row gap-2 items-center justify-between">
+      <div className="flex flex-col sm:flex-row gap-2.5 items-center justify-between">
         <div className="relative w-full sm:w-80">
           <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
           <input
@@ -32,39 +32,39 @@ export const QueueFilterToolbar: React.FC<QueueFilterToolbarProps> = ({
             placeholder="Search complaint text, external ID, locality..."
             value={filters.search || ''}
             onChange={(e) => onFilterChange({ search: e.target.value, page: 1 })}
-            className="w-full pl-9 pr-3 py-1.5 bg-slate-950 border border-slate-750 rounded text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-sky-500 transition-colors"
+            className="w-full pl-9 pr-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:bg-white transition-all font-medium"
           />
         </div>
 
-        <div className="flex items-center gap-2 self-end sm:self-auto text-xs">
-          <span className="text-slate-400">
-            Showing <strong className="text-slate-200 font-mono">{totalFiltered}</strong> matching records
+        <div className="flex items-center gap-2.5 self-end sm:self-auto text-xs">
+          <span className="text-slate-500">
+            Showing <strong className="text-blue-900 font-mono font-bold">{totalFiltered}</strong> matching records
           </span>
           <button
             onClick={onResetFilters}
-            className="flex items-center gap-1 px-2.5 py-1.5 bg-slate-800 hover:bg-slate-750 text-slate-300 rounded text-xs border border-slate-700 hover:border-slate-600 transition-colors"
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs border border-slate-200 font-semibold transition-all"
             title="Reset all filters"
           >
-            <RotateCcw className="w-3.5 h-3.5 text-slate-400" />
+            <RotateCcw className="w-3.5 h-3.5 text-slate-500" />
             <span>Reset</span>
           </button>
         </div>
       </div>
 
       {/* Grid of 9 Multi-select / Dropdown Filters */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-9 gap-2 pt-1 border-t border-slate-800/80">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-9 gap-2 pt-2 border-t border-slate-100">
         {/* 1. Department */}
         <div>
-          <label className="block text-[10px] font-semibold uppercase tracking-wider text-slate-400 mb-1">
+          <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">
             Department
           </label>
           <select
             value={filters.department || 'ALL'}
             onChange={(e) => onFilterChange({ department: e.target.value, page: 1 })}
-            className="w-full bg-slate-950 border border-slate-800 rounded py-1 px-2 text-xs text-slate-200 focus:outline-none focus:border-sky-500"
+            className="w-full bg-slate-50 border border-slate-200 rounded-lg py-1 px-2 text-xs text-slate-700 font-medium focus:outline-none focus:border-blue-500 focus:bg-white"
           >
-            <option value="ALL">All Departments</option>
-            <option value="UNASSIGNED">Unassigned / Pending</option>
+            <option value="ALL">All Units</option>
+            <option value="UNASSIGNED">Unassigned</option>
             {departments.map((d) => (
               <option key={d.code} value={d.name}>
                 {d.name}
@@ -75,15 +75,15 @@ export const QueueFilterToolbar: React.FC<QueueFilterToolbarProps> = ({
 
         {/* 2. Urgency */}
         <div>
-          <label className="block text-[10px] font-semibold uppercase tracking-wider text-slate-400 mb-1">
+          <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">
             Urgency
           </label>
           <select
             value={filters.urgency || 'ALL'}
             onChange={(e) => onFilterChange({ urgency: e.target.value, page: 1 })}
-            className="w-full bg-slate-950 border border-slate-800 rounded py-1 px-2 text-xs text-slate-200 focus:outline-none focus:border-sky-500"
+            className="w-full bg-slate-50 border border-slate-200 rounded-lg py-1 px-2 text-xs text-slate-700 font-medium focus:outline-none focus:border-blue-500 focus:bg-white"
           >
-            <option value="ALL">All Urgencies</option>
+            <option value="ALL">All Levels</option>
             <option value="CRITICAL">Critical</option>
             <option value="HIGH">High</option>
             <option value="MEDIUM">Medium</option>
@@ -93,17 +93,17 @@ export const QueueFilterToolbar: React.FC<QueueFilterToolbarProps> = ({
 
         {/* 3. Source Channel */}
         <div>
-          <label className="block text-[10px] font-semibold uppercase tracking-wider text-slate-400 mb-1">
+          <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">
             Channel
           </label>
           <select
             value={filters.sourceChannel || 'ALL'}
             onChange={(e) => onFilterChange({ sourceChannel: e.target.value, page: 1 })}
-            className="w-full bg-slate-950 border border-slate-800 rounded py-1 px-2 text-xs text-slate-200 focus:outline-none focus:border-sky-500"
+            className="w-full bg-slate-50 border border-slate-200 rounded-lg py-1 px-2 text-xs text-slate-700 font-medium focus:outline-none focus:border-blue-500 focus:bg-white"
           >
-            <option value="ALL">All Channels</option>
+            <option value="ALL">All Sources</option>
             <option value="CM_HELPLINE_181">CM Helpline 181</option>
-            <option value="MUNICIPAL_APP">Bhopal App</option>
+            <option value="MUNICIPAL_APP">Bhopal 311</option>
             <option value="ELECTED_REP">Elected Rep</option>
             <option value="SOCIAL_MEDIA">Social Media</option>
             <option value="MANUAL_IMPORT">Manual Import</option>
@@ -112,13 +112,13 @@ export const QueueFilterToolbar: React.FC<QueueFilterToolbarProps> = ({
 
         {/* 4. Ward */}
         <div>
-          <label className="block text-[10px] font-semibold uppercase tracking-wider text-slate-400 mb-1">
+          <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">
             Ward
           </label>
           <select
             value={filters.ward || 'ALL'}
             onChange={(e) => onFilterChange({ ward: e.target.value, page: 1 })}
-            className="w-full bg-slate-950 border border-slate-800 rounded py-1 px-2 text-xs text-slate-200 focus:outline-none focus:border-sky-500"
+            className="w-full bg-slate-50 border border-slate-200 rounded-lg py-1 px-2 text-xs text-slate-700 font-medium focus:outline-none focus:border-blue-500 focus:bg-white"
           >
             <option value="ALL">All Wards</option>
             {wards.map((w) => (
@@ -131,13 +131,13 @@ export const QueueFilterToolbar: React.FC<QueueFilterToolbarProps> = ({
 
         {/* 5. Locality */}
         <div>
-          <label className="block text-[10px] font-semibold uppercase tracking-wider text-slate-400 mb-1">
+          <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">
             Locality
           </label>
           <select
             value={filters.locality || 'ALL'}
             onChange={(e) => onFilterChange({ locality: e.target.value, page: 1 })}
-            className="w-full bg-slate-950 border border-slate-800 rounded py-1 px-2 text-xs text-slate-200 focus:outline-none focus:border-sky-500"
+            className="w-full bg-slate-50 border border-slate-200 rounded-lg py-1 px-2 text-xs text-slate-700 font-medium focus:outline-none focus:border-blue-500 focus:bg-white"
           >
             <option value="ALL">All Localities</option>
             {localities.map((loc) => (
@@ -148,72 +148,71 @@ export const QueueFilterToolbar: React.FC<QueueFilterToolbarProps> = ({
           </select>
         </div>
 
-        {/* 6. Duplicate Status */}
+        {/* 6. Processing Status */}
         <div>
-          <label className="block text-[10px] font-semibold uppercase tracking-wider text-slate-400 mb-1">
-            Duplicate
-          </label>
-          <select
-            value={filters.duplicateStatus || 'ALL'}
-            onChange={(e) => onFilterChange({ duplicateStatus: e.target.value, page: 1 })}
-            className="w-full bg-slate-950 border border-slate-800 rounded py-1 px-2 text-xs text-slate-200 focus:outline-none focus:border-sky-500"
-          >
-            <option value="ALL">All Statuses</option>
-            <option value="UNIQUE">Unique Only</option>
-            <option value="POSSIBLE_DUPLICATE">Possible Duplicate</option>
-            <option value="CONFIRMED_DUPLICATE">Confirmed Duplicate</option>
-          </select>
-        </div>
-
-        {/* 7. Human Review Status */}
-        <div>
-          <label className="block text-[10px] font-semibold uppercase tracking-wider text-slate-400 mb-1">
-            Review Status
-          </label>
-          <select
-            value={filters.reviewStatus || 'ALL'}
-            onChange={(e) => onFilterChange({ reviewStatus: e.target.value, page: 1 })}
-            className="w-full bg-slate-950 border border-slate-800 rounded py-1 px-2 text-xs text-slate-200 focus:outline-none focus:border-sky-500"
-          >
-            <option value="ALL">All</option>
-            <option value="REQUIRES_HUMAN_REVIEW">Needs Review</option>
-            <option value="PENDING_REVIEW">Pending Review</option>
-            <option value="REVIEWED">Reviewed by Operator</option>
-          </select>
-        </div>
-
-        {/* 8. Processing Status */}
-        <div>
-          <label className="block text-[10px] font-semibold uppercase tracking-wider text-slate-400 mb-1">
-            Engine Status
+          <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">
+            Status
           </label>
           <select
             value={filters.processingStatus || 'ALL'}
             onChange={(e) => onFilterChange({ processingStatus: e.target.value, page: 1 })}
-            className="w-full bg-slate-950 border border-slate-800 rounded py-1 px-2 text-xs text-slate-200 focus:outline-none focus:border-sky-500"
+            className="w-full bg-slate-50 border border-slate-200 rounded-lg py-1 px-2 text-xs text-slate-700 font-medium focus:outline-none focus:border-blue-500 focus:bg-white"
           >
-            <option value="ALL">All Stages</option>
+            <option value="ALL">All Statuses</option>
             <option value="PROCESSED">Processed</option>
             <option value="UNPROCESSED">Unprocessed</option>
-            <option value="REQUIRES_REVIEW">Requires Review</option>
-            <option value="REJECTED">Rejected</option>
+            <option value="FAILED">Failed</option>
+            <option value="IGNORED">Ignored</option>
           </select>
         </div>
 
-        {/* 9. Language */}
+        {/* 7. Human Review Required */}
         <div>
-          <label className="block text-[10px] font-semibold uppercase tracking-wider text-slate-400 mb-1">
-            Language
+          <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">
+            Review Flag
           </label>
           <select
-            value={filters.language || 'ALL'}
-            onChange={(e) => onFilterChange({ language: e.target.value, page: 1 })}
-            className="w-full bg-slate-950 border border-slate-800 rounded py-1 px-2 text-xs text-slate-200 focus:outline-none focus:border-sky-500"
+            value={filters.reviewStatus || 'ALL'}
+            onChange={(e) => onFilterChange({ reviewStatus: e.target.value, page: 1 })}
+            className="w-full bg-slate-50 border border-slate-200 rounded-lg py-1 px-2 text-xs text-slate-700 font-medium focus:outline-none focus:border-blue-500 focus:bg-white"
           >
-            <option value="ALL">All Languages</option>
-            <option value="hi">Hindi (hi)</option>
-            <option value="en">English (en)</option>
-            <option value="hi-en">Hinglish (hi-en)</option>
+            <option value="ALL">All Records</option>
+            <option value="REQUIRES_HUMAN_REVIEW">Review Needed</option>
+            <option value="REVIEW_OPTIONAL">Standard Auto</option>
+          </select>
+        </div>
+
+        {/* 8. Duplicate Status */}
+        <div>
+          <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">
+            Duplicates
+          </label>
+          <select
+            value={filters.duplicateStatus || 'ALL'}
+            onChange={(e) => onFilterChange({ duplicateStatus: e.target.value, page: 1 })}
+            className="w-full bg-slate-50 border border-slate-200 rounded-lg py-1 px-2 text-xs text-slate-700 font-medium focus:outline-none focus:border-blue-500 focus:bg-white"
+          >
+            <option value="ALL">All Types</option>
+            <option value="UNIQUE">Unique Tickets</option>
+            <option value="POSSIBLE_DUPLICATE">Near Duplicates</option>
+            <option value="CONFIRMED_DUPLICATE">Confirmed Dups</option>
+          </select>
+        </div>
+
+        {/* 9. Media Type */}
+        <div>
+          <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">
+            Media
+          </label>
+          <select
+            value={filters.mediaType || 'ALL'}
+            onChange={(e) => onFilterChange({ mediaType: e.target.value, page: 1 })}
+            className="w-full bg-slate-50 border border-slate-200 rounded-lg py-1 px-2 text-xs text-slate-700 font-medium focus:outline-none focus:border-blue-500 focus:bg-white"
+          >
+            <option value="ALL">All Media</option>
+            <option value="IMAGE">Photo Reports</option>
+            <option value="AUDIO">Audio Calls</option>
+            <option value="NONE">Text Grievance</option>
           </select>
         </div>
       </div>

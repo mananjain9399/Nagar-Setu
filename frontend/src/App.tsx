@@ -114,7 +114,7 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col">
+    <div className="min-h-screen bg-[#f4f7fb] text-slate-800 flex flex-col font-sans">
       {/* Top Operator Header with Navigation Tabs */}
       <OperatorHeader
         activeTab={activeTab}
@@ -259,15 +259,15 @@ export function App() {
       )}
 
       {/* Footer */}
-      <footer className="glass-panel text-slate-400 text-xs py-3.5 px-4 text-center mt-auto border-t border-slate-800/80">
+      <footer className="bg-white border-t border-slate-200 text-slate-500 text-xs py-3.5 px-4 text-center mt-auto shadow-sm">
         <div className="flex flex-col sm:flex-row items-center justify-between max-w-7xl mx-auto gap-2">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-teal-400 animate-ping" />
-            <span className="font-semibold text-slate-300">Nagar Setu (नगर सेतु)</span>
+            <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
+            <span className="font-bold text-slate-800">Nagar Setu (नगर सेतु)</span>
             <span className="text-slate-500">• Bhopal Civic Grievance & Intelligence Bridge</span>
           </div>
-          <p className="text-slate-500 font-mono text-[11px]">
-            Zone Operations Console • Multimodal AI • Synthetic Triage Environment
+          <p className="text-slate-400 font-mono text-[11px]">
+            Bhopal Municipal Corporation • Zone Operations Console • Synthetic Triage Dataset
           </p>
         </div>
       </footer>

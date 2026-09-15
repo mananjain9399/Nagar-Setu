@@ -17,29 +17,29 @@ export const LocalityWardDistribution: React.FC<LocalityWardProps> = ({
   const [view, setView] = useState<'locality' | 'ward'>('locality');
 
   return (
-    <div className="dual-card rounded-xl p-5 shadow-xl border border-white/10 flex flex-col justify-between">
+    <div className="bw-card rounded-xl p-5 flex flex-col justify-between">
       <div>
-        <div className="flex items-center justify-between pb-3.5 mb-3.5 border-b border-white/10 gap-2">
+        <div className="flex items-center justify-between pb-3 mb-3 border-b border-slate-100 gap-2">
           <div className="flex items-center gap-2.5">
-            <div className="p-1.5 rounded-lg bg-indigo-500/10 border border-indigo-500/20">
+            <div className="p-1.5 rounded-lg bg-indigo-50 text-indigo-600">
               {view === 'locality' ? (
-                <MapPin className="w-4 h-4 text-indigo-400" />
+                <MapPin className="w-4 h-4" />
               ) : (
-                <Navigation className="w-4 h-4 text-indigo-400" />
+                <Navigation className="w-4 h-4" />
               )}
             </div>
-            <h3 className="text-sm font-bold text-white tracking-tight">
+            <h3 className="text-sm font-bold text-slate-900 tracking-tight">
               {view === 'locality' ? 'Bhopal Localities' : 'Municipal Wards'}
             </h3>
           </div>
 
-          <div className="flex items-center gap-1 bg-[#060a14] p-1 rounded-lg border border-white/10">
+          <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-lg border border-slate-200">
             <button
               onClick={() => setView('locality')}
               className={`px-2.5 py-1 text-xs rounded-md font-semibold transition-all ${
                 view === 'locality'
-                  ? 'bg-white text-slate-950 font-bold shadow-sm'
-                  : 'text-slate-400 hover:text-white'
+                  ? 'bg-white text-blue-900 font-bold shadow-sm'
+                  : 'text-slate-600 hover:text-slate-900'
               }`}
             >
               Localities ({localities.length})
@@ -48,8 +48,8 @@ export const LocalityWardDistribution: React.FC<LocalityWardProps> = ({
               onClick={() => setView('ward')}
               className={`px-2.5 py-1 text-xs rounded-md font-semibold transition-all ${
                 view === 'ward'
-                  ? 'bg-white text-slate-950 font-bold shadow-sm'
-                  : 'text-slate-400 hover:text-white'
+                  ? 'bg-white text-blue-900 font-bold shadow-sm'
+                  : 'text-slate-600 hover:text-slate-900'
               }`}
             >
               Wards ({wards.length})
@@ -63,12 +63,12 @@ export const LocalityWardDistribution: React.FC<LocalityWardProps> = ({
               <div
                 key={l.name}
                 onClick={() => onSelectLocality(l.name)}
-                className="flex items-center justify-between p-2.5 rounded-lg bg-[#060a14]/60 border border-white/5 hover:border-indigo-400/40 cursor-pointer transition-all hover:bg-white/5 group"
+                className="flex items-center justify-between p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-300 hover:bg-blue-50/50 cursor-pointer transition-all group"
               >
-                <span className="text-xs text-slate-200 group-hover:text-white truncate font-medium max-w-[140px]">
+                <span className="text-xs text-slate-700 group-hover:text-blue-900 truncate font-semibold max-w-[140px]">
                   {l.name}
                 </span>
-                <span className="font-mono text-xs font-bold text-white bg-indigo-950/80 px-2 py-0.5 rounded border border-indigo-500/30">
+                <span className="font-mono text-xs font-bold text-blue-700 bg-white px-2 py-0.5 rounded border border-blue-200 shadow-2xs">
                   {l.count}
                 </span>
               </div>
@@ -78,12 +78,12 @@ export const LocalityWardDistribution: React.FC<LocalityWardProps> = ({
               <div
                 key={w.name}
                 onClick={() => onSelectWard(w.name)}
-                className="flex items-center justify-between p-2.5 rounded-lg bg-[#060a14]/60 border border-white/5 hover:border-indigo-400/40 cursor-pointer transition-all hover:bg-white/5 group"
+                className="flex items-center justify-between p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-300 hover:bg-blue-50/50 cursor-pointer transition-all group"
               >
-                <span className="text-xs text-slate-200 group-hover:text-white truncate font-medium max-w-[140px]">
+                <span className="text-xs text-slate-700 group-hover:text-blue-900 truncate font-semibold max-w-[140px]">
                   {w.name}
                 </span>
-                <span className="font-mono text-xs font-bold text-white bg-indigo-950/80 px-2 py-0.5 rounded border border-indigo-500/30">
+                <span className="font-mono text-xs font-bold text-blue-700 bg-white px-2 py-0.5 rounded border border-blue-200 shadow-2xs">
                   {w.count}
                 </span>
               </div>

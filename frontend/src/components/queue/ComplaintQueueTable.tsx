@@ -35,19 +35,19 @@ export const ComplaintQueueTable: React.FC<ComplaintQueueTableProps> = ({
 }) => {
   if (loading) {
     return (
-      <div className="bg-slate-900 border border-slate-800 rounded-lg p-12 text-center">
-        <div className="inline-block animate-spin w-8 h-8 border-4 border-sky-500 border-t-transparent rounded-full mb-3" />
-        <p className="text-sm text-slate-300 font-medium">Loading complaint records from zone database...</p>
+      <div className="bw-card rounded-xl p-12 text-center">
+        <div className="inline-block animate-spin w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full mb-3" />
+        <p className="text-sm text-slate-600 font-medium">Loading complaint records from zone database...</p>
       </div>
     );
   }
 
   if (complaints.length === 0) {
     return (
-      <div className="bg-slate-900 border border-slate-800 rounded-lg p-12 text-center">
-        <Clock className="w-12 h-12 text-slate-600 mx-auto mb-3" />
-        <h4 className="text-base font-semibold text-slate-200">No matching complaint records found</h4>
-        <p className="text-xs text-slate-400 mt-1 max-w-md mx-auto">
+      <div className="bw-card rounded-xl p-12 text-center">
+        <Clock className="w-12 h-12 text-slate-300 mx-auto mb-3" />
+        <h4 className="text-base font-bold text-slate-800">No matching complaint records found</h4>
+        <p className="text-xs text-slate-500 mt-1 max-w-md mx-auto">
           No records match the current filter criteria. Try resetting filters or import new complaint exports.
         </p>
       </div>
@@ -55,151 +55,115 @@ export const ComplaintQueueTable: React.FC<ComplaintQueueTableProps> = ({
   }
 
   return (
-    <div className="bg-slate-900 border border-slate-800 rounded-lg shadow-sm overflow-hidden">
-      {/* High-density operational data table */}
+    <div className="bw-card rounded-xl overflow-hidden">
+      {/* Table */}
       <div className="overflow-x-auto">
-        <table className="w-full text-left text-xs text-slate-300 border-collapse">
-          <thead className="bg-slate-950 text-slate-400 uppercase font-mono text-[11px] border-b border-slate-800">
-            <tr>
-              <th className="py-2.5 px-3">Complaint / Ref</th>
-              <th className="py-2.5 px-2.5">Channel</th>
-              <th className="py-2.5 px-3 min-w-[260px]">Raw Complaint Text</th>
-              <th className="py-2.5 px-2">Lang</th>
-              <th className="py-2.5 px-2.5">Department / Category</th>
-              <th className="py-2.5 px-2">Urgency</th>
-              <th className="py-2.5 px-2.5">Ward / Locality</th>
-              <th className="py-2.5 px-2">Duplicate</th>
-              <th className="py-2.5 px-2">Status</th>
-              <th className="py-2.5 px-2 text-center">Conf</th>
-              <th className="py-2.5 px-2.5 text-right">Action</th>
+        <table className="w-full text-left text-xs border-collapse">
+          <thead>
+            <tr className="bg-slate-50 text-slate-600 font-bold border-b border-slate-200 uppercase tracking-wider text-[10px]">
+              <th className="py-3 px-3.5">ID / Channel</th>
+              <th className="py-3 px-3.5">Grievance Summary</th>
+              <th className="py-3 px-3">Department & Category</th>
+              <th className="py-3 px-2.5">Location / Ward</th>
+              <th className="py-3 px-2.5">Urgency</th>
+              <th className="py-3 px-2.5">Status</th>
+              <th className="py-3 px-2.5">Duplicate</th>
+              <th className="py-3 px-3 text-right">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-800/60 font-sans">
+          <tbody className="divide-y divide-slate-100">
             {complaints.map((c) => {
-              const hasReviews = (c._count?.reviews ?? 0) > 0 || (c.reviews && c.reviews.length > 0);
-              const confPct = c.confidence ? Math.round(c.confidence * 100) : null;
-
+              const isUnassigned = !c.department;
               return (
                 <tr
                   key={c.id}
-                  className="hover:bg-slate-850/80 transition-colors group cursor-pointer"
                   onClick={() => onSelectComplaint(c)}
+                  className={`cursor-pointer transition-colors hover:bg-blue-50/40 ${
+                    c.requiresHumanReview ? 'bg-amber-50/20' : 'bg-white'
+                  }`}
                 >
-                  {/* ID / External ID */}
-                  <td className="py-2.5 px-3">
-                    <div className="font-mono font-bold text-slate-100 group-hover:text-sky-300 transition-colors">
-                      {c.externalId || c.id.slice(0, 8)}
+                  {/* 1. ID / Channel */}
+                  <td className="py-2.5 px-3.5 whitespace-nowrap">
+                    <div className="font-mono text-xs font-bold text-blue-900">
+                      {c.externalId || c.id.substring(0, 10)}
                     </div>
-                    <div className="text-[10px] text-slate-500 font-mono">
-                      {new Date(c.createdAt).toLocaleDateString('en-GB', {
-                        day: '2-digit',
-                        month: 'short',
-                        hour: '2-digit',
-                        minute: '2-digit',
-                      })}
+                    <div className="mt-1">
+                      <ChannelBadge channel={c.sourceChannel} />
                     </div>
                   </td>
 
-                  {/* Channel */}
-                  <td className="py-2.5 px-2.5">
-                    <ChannelBadge channel={c.sourceChannel} />
-                  </td>
-
-                  {/* Raw Text Snippet */}
-                  <td className="py-2.5 px-3">
-                    <p className="line-clamp-2 text-slate-200 leading-relaxed font-sans">
+                  {/* 2. Text Summary */}
+                  <td className="py-2.5 px-3.5 max-w-xs sm:max-w-sm">
+                    <p className="line-clamp-2 text-slate-700 font-medium leading-relaxed">
                       {c.rawText}
                     </p>
-                    {c.caption && (
-                      <span className="text-[10px] text-slate-400 italic block mt-0.5 truncate max-w-sm">
-                        Attachment: {c.caption}
-                      </span>
-                    )}
-                  </td>
-
-                  {/* Language */}
-                  <td className="py-2.5 px-2">
-                    <span className="px-1.5 py-0.5 rounded font-mono text-[10px] uppercase font-semibold bg-slate-800 text-slate-300 border border-slate-700">
-                      {c.language || 'en'}
-                    </span>
-                  </td>
-
-                  {/* Department & Category */}
-                  <td className="py-2.5 px-2.5">
-                    <div className="font-medium text-slate-200 truncate max-w-[180px]">
-                      {c.department || <span className="text-slate-500 italic">Unassigned</span>}
-                    </div>
-                    <div className="text-[11px] text-slate-400 truncate max-w-[180px]">
-                      {c.category || <span className="text-slate-500">-</span>}
-                    </div>
-                  </td>
-
-                  {/* Urgency */}
-                  <td className="py-2.5 px-2 whitespace-nowrap">
-                    <UrgencyBadge urgency={c.urgency} />
-                  </td>
-
-                  {/* Ward / Locality */}
-                  <td className="py-2.5 px-2.5">
-                    <div className="font-medium text-slate-200 truncate max-w-[130px]">
-                      {c.locality || 'Unknown'}
-                    </div>
-                    <div className="text-[10px] font-mono text-slate-400">
-                      {c.ward || 'Zone General'}
-                    </div>
-                  </td>
-
-                  {/* Duplicate Status */}
-                  <td className="py-2.5 px-2 whitespace-nowrap">
-                    <DuplicateBadge duplicateStatus={c.duplicateStatus} />
-                  </td>
-
-                  {/* Processing / Review Status */}
-                  <td className="py-2.5 px-2 whitespace-nowrap">
-                    <div className="flex flex-col gap-1 items-start">
-                      <StatusBadge
-                        status={c.processingStatus}
-                        requiresHumanReview={c.requiresHumanReview}
-                      />
-                      {hasReviews && (
-                        <span className="inline-flex items-center gap-1 text-[10px] text-emerald-400 font-medium">
-                          <ShieldCheck className="w-2.5 h-2.5" />
-                          Operator Reviewed
+                    <div className="flex items-center gap-2 mt-1 text-[11px] text-slate-400">
+                      <span>{new Date(c.createdAt).toLocaleDateString('en-IN')}</span>
+                      {c.mediaType && c.mediaType !== 'NONE' && (
+                        <span className="font-mono px-1.5 py-0.2 rounded bg-slate-100 text-slate-600 text-[10px] font-semibold">
+                          📎 {c.mediaType}
                         </span>
                       )}
                     </div>
                   </td>
 
-                  {/* Confidence */}
-                  <td className="py-2.5 px-2 text-center whitespace-nowrap font-mono">
-                    {confPct !== null ? (
-                      <span
-                        className={`text-[11px] font-bold ${
-                          confPct >= 90
-                            ? 'text-emerald-400'
-                            : confPct >= 75
-                            ? 'text-sky-400'
-                            : 'text-amber-400'
-                        }`}
-                      >
-                        {confPct}%
+                  {/* 3. Department & Category */}
+                  <td className="py-2.5 px-3 whitespace-nowrap">
+                    {isUnassigned ? (
+                      <span className="inline-block px-2 py-0.5 rounded text-[10px] font-bold bg-amber-50 text-amber-700 border border-amber-200">
+                        Unassigned
                       </span>
                     ) : (
-                      <span className="text-slate-600">-</span>
+                      <>
+                        <div className="font-bold text-slate-900 truncate max-w-[170px]">
+                          {c.department}
+                        </div>
+                        <div className="text-[11px] text-slate-500 truncate max-w-[170px] mt-0.5">
+                          {c.category || '—'}
+                        </div>
+                      </>
                     )}
                   </td>
 
-                  {/* Actions */}
-                  <td className="py-2.5 px-2.5 text-right whitespace-nowrap">
+                  {/* 4. Location / Ward */}
+                  <td className="py-2.5 px-2.5 whitespace-nowrap">
+                    <div className="font-semibold text-slate-800 truncate max-w-[140px]">
+                      {c.locality || 'Unknown'}
+                    </div>
+                    <div className="text-[11px] font-mono text-blue-700 font-medium">
+                      {c.ward || 'No Ward'}
+                    </div>
+                  </td>
+
+                  {/* 5. Urgency */}
+                  <td className="py-2.5 px-2.5 whitespace-nowrap">
+                    <UrgencyBadge urgency={c.urgency} />
+                  </td>
+
+                  {/* 6. Processing Status */}
+                  <td className="py-2.5 px-2.5 whitespace-nowrap">
+                    <StatusBadge
+                      status={c.processingStatus}
+                      requiresHumanReview={c.requiresHumanReview}
+                    />
+                  </td>
+
+                  {/* 7. Duplicate Status */}
+                  <td className="py-2.5 px-2.5 whitespace-nowrap">
+                    <DuplicateBadge duplicateStatus={c.duplicateStatus} />
+                  </td>
+
+                  {/* 8. Action */}
+                  <td className="py-2.5 px-3 text-right whitespace-nowrap">
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
                         onSelectComplaint(c);
                       }}
-                      className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-sky-950 hover:bg-sky-900 text-sky-300 hover:text-white border border-sky-800 text-xs font-medium transition-colors"
+                      className="p-1.5 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white transition-all shadow-2xs font-semibold"
+                      title="Inspect Ticket"
                     >
-                      <Eye className="w-3.5 h-3.5" />
-                      <span>Review</span>
+                      <Eye className="w-4 h-4" />
                     </button>
                   </td>
                 </tr>
@@ -210,28 +174,25 @@ export const ComplaintQueueTable: React.FC<ComplaintQueueTableProps> = ({
       </div>
 
       {/* Pagination Footer */}
-      <div className="bg-slate-950 border-t border-slate-800 px-4 py-3 flex items-center justify-between text-xs text-slate-400">
-        <div>
-          Showing page <strong className="text-slate-200 font-mono">{currentPage}</strong> of{' '}
-          <strong className="text-slate-200 font-mono">{totalPages || 1}</strong> ({totalCount} total records)
+      <div className="bg-slate-50 px-4 py-3 border-t border-slate-200 flex items-center justify-between text-xs">
+        <div className="text-slate-500">
+          Showing page <strong className="text-slate-900 font-bold">{currentPage}</strong> of{' '}
+          <strong className="text-slate-900 font-bold">{totalPages || 1}</strong> ({totalCount} items)
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
           <button
             disabled={currentPage <= 1}
             onClick={() => onPageChange(currentPage - 1)}
-            className="flex items-center gap-1 px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-slate-300 disabled:opacity-40 disabled:cursor-not-allowed hover:bg-slate-800 transition-colors"
+            className="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-slate-200 bg-white text-slate-700 font-semibold disabled:opacity-40 disabled:cursor-not-allowed hover:bg-slate-100 transition-all shadow-2xs"
           >
             <ChevronLeft className="w-3.5 h-3.5" />
-            <span>Prev</span>
+            <span>Previous</span>
           </button>
-
-          <span className="px-2 font-mono text-slate-300">{currentPage}</span>
-
           <button
             disabled={currentPage >= totalPages}
             onClick={() => onPageChange(currentPage + 1)}
-            className="flex items-center gap-1 px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-slate-300 disabled:opacity-40 disabled:cursor-not-allowed hover:bg-slate-800 transition-colors"
+            className="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-slate-200 bg-white text-slate-700 font-semibold disabled:opacity-40 disabled:cursor-not-allowed hover:bg-slate-100 transition-all shadow-2xs"
           >
             <span>Next</span>
             <ChevronRight className="w-3.5 h-3.5" />

@@ -8,6 +8,7 @@ import {
 } from './types';
 import { OperatorHeader, ActiveTabType } from './components/layout/OperatorHeader';
 import { MetricGrid } from './components/dashboard/MetricGrid';
+import { GreetingHero } from './components/dashboard/GreetingHero';
 import { DepartmentDistribution } from './components/dashboard/DepartmentDistribution';
 import { CategoryDistribution } from './components/dashboard/CategoryDistribution';
 import { LocalityWardDistribution } from './components/dashboard/LocalityWardDistribution';
@@ -128,48 +129,78 @@ export function App() {
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
         {/* ================= VIEW 1: DASHBOARD ================= */}
         {activeTab === 'dashboard' && (
-          <div className="space-y-6">
-            {/* Operational KPIs */}
+          <div className="space-y-8">
+            {/* Top Clean Greeting Hero */}
             {stats && (
-              <MetricGrid
+              <GreetingHero
                 stats={stats.summary}
-                onFilterClick={handleQuickFilter}
+                qualityScore={qualityScore}
+                onNavigateTab={(tab) => setActiveTab(tab)}
+                onScrollToAnalytics={() => {
+                  const el = document.getElementById('operational-analytics');
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }}
               />
             )}
 
-            {/* Distribution Grids */}
-            {stats && (
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
-                {/* 1. Complaints by Department */}
-                <DepartmentDistribution
-                  data={stats.byDepartment}
-                  total={stats.summary.totalComplaints}
-                  onSelectDepartment={(dept) => handleQuickFilter('department', dept)}
-                />
-
-                {/* 2. Complaints by Category */}
-                <CategoryDistribution
-                  data={stats.byCategory}
-                  total={stats.summary.totalComplaints}
-                  onSelectCategory={(cat) => handleQuickFilter('category', cat)}
-                />
-
-                {/* 3. Locality & Ward Density + Channels */}
-                <div className="space-y-5">
-                  <LocalityWardDistribution
-                    localities={stats.byLocality}
-                    wards={stats.byWard}
-                    onSelectLocality={(loc) => handleQuickFilter('locality', loc)}
-                    onSelectWard={(w) => handleQuickFilter('ward', w)}
-                  />
-                  <ChannelDistribution
-                    data={stats.bySourceChannel}
-                    total={stats.summary.totalComplaints}
-                    onSelectChannel={(ch) => handleQuickFilter('sourceChannel', ch)}
-                  />
+            {/* Operational Section Anchor */}
+            <div id="operational-analytics" className="space-y-6 pt-2">
+              <div className="flex items-center justify-between pb-2 border-b border-slate-200">
+                <div>
+                  <h3 className="text-lg font-bold text-slate-900 tracking-tight font-heading">
+                    Zone Operational Overview
+                  </h3>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    Live grievance indicators and automated municipal triage metrics
+                  </p>
                 </div>
+                <span className="text-xs font-mono font-medium text-slate-500 bg-white px-2.5 py-1 rounded-md border border-slate-200">
+                  REAL-TIME STATS
+                </span>
               </div>
-            )}
+
+              {/* Operational KPIs */}
+              {stats && (
+                <MetricGrid
+                  stats={stats.summary}
+                  onFilterClick={handleQuickFilter}
+                />
+              )}
+
+              {/* Distribution Grids */}
+              {stats && (
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+                  {/* 1. Complaints by Department */}
+                  <DepartmentDistribution
+                    data={stats.byDepartment}
+                    total={stats.summary.totalComplaints}
+                    onSelectDepartment={(dept) => handleQuickFilter('department', dept)}
+                  />
+
+                  {/* 2. Complaints by Category */}
+                  <CategoryDistribution
+                    data={stats.byCategory}
+                    total={stats.summary.totalComplaints}
+                    onSelectCategory={(cat) => handleQuickFilter('category', cat)}
+                  />
+
+                  {/* 3. Locality & Ward Density + Channels */}
+                  <div className="space-y-5">
+                    <LocalityWardDistribution
+                      localities={stats.byLocality}
+                      wards={stats.byWard}
+                      onSelectLocality={(loc) => handleQuickFilter('locality', loc)}
+                      onSelectWard={(w) => handleQuickFilter('ward', w)}
+                    />
+                    <ChannelDistribution
+                      data={stats.bySourceChannel}
+                      total={stats.summary.totalComplaints}
+                      onSelectChannel={(ch) => handleQuickFilter('sourceChannel', ch)}
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         )}
 

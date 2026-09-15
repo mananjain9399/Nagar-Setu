@@ -8,31 +8,36 @@ export default {
     extend: {
       colors: {
         brand: {
-          50: '#eff6ff',
-          100: '#dbeafe',
-          200: '#bfdbfe',
-          300: '#93c5fd',
-          400: '#60a5fa',
-          500: '#3b82f6',
-          600: '#2563eb',
-          700: '#1d4ed8',
-          800: '#1e40af',
-          900: '#1e3a8a',
-          950: '#0f2444',
+          50: '#f0f5ff',
+          100: '#e0ebff',
+          200: '#c7dbfe',
+          300: '#a4c4fd',
+          400: '#7aa4fb',
+          500: '#4f7df6',
+          600: '#345ded',
+          700: '#2646d8',
+          800: '#2339ae',
+          900: '#1e328a',
+          950: '#172154',
         },
-        navy: {
-          900: '#0b192c',
-          950: '#07101e',
+        matte: {
+          blue: '#1e3a8a',
+          dark: '#0f172a',
+          surface: '#ffffff',
+          bg: '#f8fafc',
+          border: '#e2e8f0',
+          subtle: '#f1f5f9',
         }
       },
       fontFamily: {
-        sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
-        mono: ['JetBrains Mono', 'Fira Code', 'monospace']
+        sans: ['DM Sans', 'Outfit', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        heading: ['Outfit', 'DM Sans', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace']
       },
       boxShadow: {
-        'card': '0 1px 3px 0 rgba(15, 23, 42, 0.08), 0 1px 2px -1px rgba(15, 23, 42, 0.08)',
-        'card-hover': '0 10px 25px -5px rgba(37, 99, 235, 0.1), 0 8px 10px -6px rgba(37, 99, 235, 0.1)',
-        'blue-glow': '0 0 20px rgba(37, 99, 235, 0.25)',
+        'matte': '0 1px 3px 0 rgba(15, 23, 42, 0.06), 0 1px 2px -1px rgba(15, 23, 42, 0.04)',
+        'matte-md': '0 4px 6px -1px rgba(15, 23, 42, 0.07), 0 2px 4px -2px rgba(15, 23, 42, 0.05)',
+        'matte-lg': '0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.04)',
       }
     },
   },

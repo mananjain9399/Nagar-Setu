@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,60 +6,68 @@
 
 @layer base {
   body {
-    @apply bg-[#070c18] text-slate-100 antialiased font-sans;
+    @apply bg-[#080d1a] text-white antialiased font-sans;
     background-image: 
-      radial-gradient(at 0% 0%, rgba(13, 148, 136, 0.08) 0px, transparent 50%),
-      radial-gradient(at 100% 0%, rgba(56, 189, 248, 0.07) 0px, transparent 50%),
-      radial-gradient(at 50% 100%, rgba(99, 102, 241, 0.06) 0px, transparent 60%);
+      radial-gradient(at 0% 0%, rgba(14, 165, 233, 0.12) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(99, 102, 241, 0.10) 0px, transparent 50%),
+      radial-gradient(at 50% 100%, rgba(20, 184, 166, 0.08) 0px, transparent 60%);
     background-attachment: fixed;
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
   }
 }
 
-/* Glassmorphic Components */
-.glass-panel {
-  background: rgba(15, 23, 42, 0.65);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+/* Dual-Tone Premium Panels */
+.dual-panel {
+  background: rgba(13, 20, 36, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
 }
 
-.glass-card {
-  background: rgba(17, 24, 39, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+.dual-card {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.glass-card:hover {
-  border-color: rgba(45, 212, 191, 0.25);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5), 0 0 15px -3px rgba(45, 212, 191, 0.1);
+.dual-card:hover {
+  border-color: rgba(56, 189, 248, 0.4);
+  box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.7), 0 0 16px -2px rgba(56, 189, 248, 0.15);
   transform: translateY(-2px);
 }
 
-/* Calm Bridge Shimmer Ribbon */
-.bridge-stream {
-  background: linear-gradient(90deg, #0d9488 0%, #0284c7 35%, #6366f1 70%, #10b981 100%);
-  background-size: 200% 200%;
-  animation: bridgeFlow 6s ease infinite;
+/* Crisp White Text Enhancements */
+.heading-white {
+  color: #ffffff;
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
-/* Custom Scrollbar */
+/* Dual-Tone Civic Bridge Ribbon */
+.bridge-stream {
+  background: linear-gradient(90deg, #0ea5e9 0%, #ffffff 50%, #0ea5e9 100%);
+  background-size: 200% 200%;
+  animation: bridgeFlow 5s ease infinite;
+}
+
+/* Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #090e17;
+  background: #080d1a;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
-  border-radius: 3px;
+  background: #22324d;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #3b5278;
 }

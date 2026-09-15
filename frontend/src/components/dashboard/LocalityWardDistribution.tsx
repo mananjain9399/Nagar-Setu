@@ -17,75 +17,79 @@ export const LocalityWardDistribution: React.FC<LocalityWardProps> = ({
   const [view, setView] = useState<'locality' | 'ward'>('locality');
 
   return (
-    <div className="bg-slate-900 border border-slate-800 rounded-lg p-4 shadow-sm">
-      <div className="flex items-center justify-between pb-3 mb-3 border-b border-slate-800">
-        <div className="flex items-center gap-2">
+    <div className="dual-card rounded-xl p-5 shadow-xl border border-white/10 flex flex-col justify-between">
+      <div>
+        <div className="flex items-center justify-between pb-3.5 mb-3.5 border-b border-white/10 gap-2">
+          <div className="flex items-center gap-2.5">
+            <div className="p-1.5 rounded-lg bg-indigo-500/10 border border-indigo-500/20">
+              {view === 'locality' ? (
+                <MapPin className="w-4 h-4 text-indigo-400" />
+              ) : (
+                <Navigation className="w-4 h-4 text-indigo-400" />
+              )}
+            </div>
+            <h3 className="text-sm font-bold text-white tracking-tight">
+              {view === 'locality' ? 'Bhopal Localities' : 'Municipal Wards'}
+            </h3>
+          </div>
+
+          <div className="flex items-center gap-1 bg-[#060a14] p-1 rounded-lg border border-white/10">
+            <button
+              onClick={() => setView('locality')}
+              className={`px-2.5 py-1 text-xs rounded-md font-semibold transition-all ${
+                view === 'locality'
+                  ? 'bg-white text-slate-950 font-bold shadow-sm'
+                  : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              Localities ({localities.length})
+            </button>
+            <button
+              onClick={() => setView('ward')}
+              className={`px-2.5 py-1 text-xs rounded-md font-semibold transition-all ${
+                view === 'ward'
+                  ? 'bg-white text-slate-950 font-bold shadow-sm'
+                  : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              Wards ({wards.length})
+            </button>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-[380px] overflow-y-auto pr-1">
           {view === 'locality' ? (
-            <MapPin className="w-4 h-4 text-purple-400" />
+            localities.map((l) => (
+              <div
+                key={l.name}
+                onClick={() => onSelectLocality(l.name)}
+                className="flex items-center justify-between p-2.5 rounded-lg bg-[#060a14]/60 border border-white/5 hover:border-indigo-400/40 cursor-pointer transition-all hover:bg-white/5 group"
+              >
+                <span className="text-xs text-slate-200 group-hover:text-white truncate font-medium max-w-[140px]">
+                  {l.name}
+                </span>
+                <span className="font-mono text-xs font-bold text-white bg-indigo-950/80 px-2 py-0.5 rounded border border-indigo-500/30">
+                  {l.count}
+                </span>
+              </div>
+            ))
           ) : (
-            <Navigation className="w-4 h-4 text-purple-400" />
+            wards.map((w) => (
+              <div
+                key={w.name}
+                onClick={() => onSelectWard(w.name)}
+                className="flex items-center justify-between p-2.5 rounded-lg bg-[#060a14]/60 border border-white/5 hover:border-indigo-400/40 cursor-pointer transition-all hover:bg-white/5 group"
+              >
+                <span className="text-xs text-slate-200 group-hover:text-white truncate font-medium max-w-[140px]">
+                  {w.name}
+                </span>
+                <span className="font-mono text-xs font-bold text-white bg-indigo-950/80 px-2 py-0.5 rounded border border-indigo-500/30">
+                  {w.count}
+                </span>
+              </div>
+            ))
           )}
-          <h3 className="text-sm font-semibold text-slate-100">
-            {view === 'locality' ? 'Bhopal Localities' : 'Municipal Wards'}
-          </h3>
         </div>
-
-        <div className="flex items-center gap-1 bg-slate-950 p-0.5 rounded border border-slate-800">
-          <button
-            onClick={() => setView('locality')}
-            className={`px-2 py-0.5 text-xs rounded transition-colors ${
-              view === 'locality'
-                ? 'bg-purple-600 text-white font-medium'
-                : 'text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            Localities ({localities.length})
-          </button>
-          <button
-            onClick={() => setView('ward')}
-            className={`px-2 py-0.5 text-xs rounded transition-colors ${
-              view === 'ward'
-                ? 'bg-purple-600 text-white font-medium'
-                : 'text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            Wards ({wards.length})
-          </button>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-[380px] overflow-y-auto pr-1">
-        {view === 'locality' ? (
-          localities.map((l) => (
-            <div
-              key={l.name}
-              onClick={() => onSelectLocality(l.name)}
-              className="flex items-center justify-between p-2 rounded bg-slate-950/60 border border-slate-800/80 hover:border-purple-500/40 cursor-pointer transition-all hover:bg-slate-850"
-            >
-              <span className="text-xs text-slate-200 truncate font-medium">
-                {l.name}
-              </span>
-              <span className="font-mono text-xs font-bold text-purple-300 bg-purple-950/60 px-1.5 py-0.5 rounded border border-purple-800/40">
-                {l.count}
-              </span>
-            </div>
-          ))
-        ) : (
-          wards.map((w) => (
-            <div
-              key={w.name}
-              onClick={() => onSelectWard(w.name)}
-              className="flex items-center justify-between p-2 rounded bg-slate-950/60 border border-slate-800/80 hover:border-purple-500/40 cursor-pointer transition-all hover:bg-slate-850"
-            >
-              <span className="text-xs text-slate-200 truncate font-medium">
-                {w.name}
-              </span>
-              <span className="font-mono text-xs font-bold text-purple-300 bg-purple-950/60 px-1.5 py-0.5 rounded border border-purple-800/40">
-                {w.count}
-              </span>
-            </div>
-          ))
-        )}
       </div>
     </div>
   );

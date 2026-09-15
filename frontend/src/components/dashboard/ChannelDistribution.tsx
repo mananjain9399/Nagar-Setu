@@ -14,41 +14,47 @@ export const ChannelDistribution: React.FC<ChannelDistributionProps> = ({
   onSelectChannel,
 }) => {
   return (
-    <div className="bg-slate-900 border border-slate-800 rounded-lg p-4 shadow-sm">
-      <div className="flex items-center justify-between pb-3 mb-3 border-b border-slate-800">
-        <div className="flex items-center gap-2">
-          <Radio className="w-4 h-4 text-sky-400" />
-          <h3 className="text-sm font-semibold text-slate-100">Grievance Source Channels</h3>
-        </div>
-        <span className="text-xs text-slate-400 font-mono">
-          Multi-Channel Exports
-        </span>
-      </div>
-
-      <div className="space-y-2">
-        {data.map((item) => {
-          const pct = total > 0 ? Math.round((item.count / total) * 100) : 0;
-          return (
-            <div
-              key={item.channel}
-              onClick={() => onSelectChannel(item.channel)}
-              className="flex items-center justify-between p-2.5 rounded bg-slate-950/60 border border-slate-800/80 hover:border-sky-500/40 hover:bg-slate-850 cursor-pointer transition-all"
-            >
-              <div className="flex items-center gap-2.5">
-                <ChannelBadge channel={item.channel} />
-                <span className="text-xs text-slate-300 font-mono">
-                  {pct}% of volume
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="font-mono text-xs font-bold text-slate-100 bg-slate-800 px-2 py-0.5 rounded">
-                  {item.count}
-                </span>
-                <ChevronRight className="w-3.5 h-3.5 text-slate-600" />
-              </div>
+    <div className="dual-card rounded-xl p-5 shadow-xl border border-white/10 flex flex-col justify-between">
+      <div>
+        <div className="flex items-center justify-between pb-3.5 mb-3.5 border-b border-white/10">
+          <div className="flex items-center gap-2.5">
+            <div className="p-1.5 rounded-lg bg-sky-500/10 border border-sky-500/20">
+              <Radio className="w-4 h-4 text-sky-400" />
             </div>
-          );
-        })}
+            <h3 className="text-sm font-bold text-white tracking-tight">
+              Grievance Source Channels
+            </h3>
+          </div>
+          <span className="text-xs text-slate-400 font-mono font-semibold px-2 py-0.5 rounded bg-white/5 border border-white/10">
+            Multi-Channel Stream
+          </span>
+        </div>
+
+        <div className="space-y-2">
+          {data.map((item) => {
+            const pct = total > 0 ? Math.round((item.count / total) * 100) : 0;
+            return (
+              <div
+                key={item.channel}
+                onClick={() => onSelectChannel(item.channel)}
+                className="flex items-center justify-between p-3 rounded-lg bg-[#060a14]/60 border border-white/5 hover:border-sky-400/40 hover:bg-white/5 cursor-pointer transition-all group"
+              >
+                <div className="flex items-center gap-3">
+                  <ChannelBadge channel={item.channel} />
+                  <span className="text-xs text-slate-300 font-mono font-medium">
+                    {pct}% volume
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="font-mono text-xs font-bold text-white bg-slate-800 px-2 py-0.5 rounded border border-white/10">
+                    {item.count}
+                  </span>
+                  <ChevronRight className="w-3.5 h-3.5 text-slate-500 group-hover:text-sky-400 group-hover:translate-x-0.5 transition-all" />
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

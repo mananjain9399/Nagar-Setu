@@ -18,96 +18,95 @@ export const MetricGrid: React.FC<MetricGridProps> = ({ stats, onFilterClick }) 
   const cards = [
     {
       id: 'total',
-      label: 'Total Complaints',
+      label: 'TOTAL COMPLAINTS',
       value: stats.totalComplaints,
-      subtext: 'In active dataset export',
+      subtext: 'Active dataset export',
       icon: FileText,
-      color: 'text-sky-400',
-      bgColor: 'bg-sky-500/10',
-      borderColor: 'border-sky-500/20',
+      color: 'text-cyan-400',
+      accentBorder: 'hover:border-cyan-400/50',
       action: () => onFilterClick && onFilterClick('clear', ''),
     },
     {
       id: 'unprocessed',
-      label: 'Unprocessed Records',
+      label: 'UNPROCESSED',
       value: stats.unprocessedCount,
-      subtext: 'Awaiting initial classification',
+      subtext: 'Awaiting triage',
       icon: Clock,
       color: 'text-slate-300',
-      bgColor: 'bg-slate-800/80',
-      borderColor: 'border-slate-700',
+      accentBorder: 'hover:border-slate-400/50',
       action: () => onFilterClick && onFilterClick('processingStatus', 'UNPROCESSED'),
     },
     {
       id: 'processed',
-      label: 'Processed Complaints',
+      label: 'AI PROCESSED',
       value: stats.processedCount,
-      subtext: 'Structured & mapped',
+      subtext: 'Structured & routed',
       icon: CheckCircle2,
       color: 'text-emerald-400',
-      bgColor: 'bg-emerald-500/10',
-      borderColor: 'border-emerald-500/20',
+      accentBorder: 'hover:border-emerald-400/50',
       action: () => onFilterClick && onFilterClick('processingStatus', 'PROCESSED'),
     },
     {
       id: 'duplicates',
-      label: 'Possible Duplicates',
+      label: 'POSSIBLE DUPLICATES',
       value: stats.possibleDuplicatesCount,
-      subtext: 'Clustered within zone / time',
+      subtext: 'Cluster matched',
       icon: Copy,
       color: 'text-indigo-400',
-      bgColor: 'bg-indigo-500/10',
-      borderColor: 'border-indigo-500/20',
+      accentBorder: 'hover:border-indigo-400/50',
       action: () => onFilterClick && onFilterClick('duplicateStatus', 'POSSIBLE_DUPLICATE'),
     },
     {
       id: 'review',
-      label: 'Human Review Required',
+      label: 'HUMAN REVIEW',
       value: stats.requiresHumanReviewCount,
-      subtext: 'Needs operator decision',
+      subtext: 'Operator decision required',
       icon: AlertTriangle,
       color: 'text-amber-400',
-      bgColor: 'bg-amber-500/10',
-      borderColor: 'border-amber-500/30',
+      accentBorder: 'hover:border-amber-400/50',
       alert: true,
       action: () => onFilterClick && onFilterClick('reviewStatus', 'REQUIRES_HUMAN_REVIEW'),
     },
     {
       id: 'critical',
-      label: 'High & Critical Urgency',
+      label: 'HIGH / CRITICAL',
       value: stats.criticalOrHighUrgencyCount,
       subtext: `${stats.criticalCount} Critical, ${stats.highCount} High priority`,
       icon: Flame,
       color: 'text-rose-400',
-      bgColor: 'bg-rose-500/10',
-      borderColor: 'border-rose-500/30',
+      accentBorder: 'hover:border-rose-400/50',
       alert: true,
       action: () => onFilterClick && onFilterClick('urgency', 'CRITICAL'),
     },
   ];
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3.5">
       {cards.map((c) => {
         const Icon = c.icon;
         return (
           <div
             key={c.id}
             onClick={c.action}
-            className={`p-3.5 rounded-lg border transition-all cursor-pointer hover:scale-[1.02] ${c.bgColor} ${c.borderColor} shadow-sm`}
+            className={`dual-card p-4 rounded-xl border border-white/10 flex flex-col justify-between cursor-pointer transition-all ${c.accentBorder} shadow-lg`}
           >
-            <div className="flex items-center justify-between mb-1.5">
-              <span className="text-xs font-medium text-slate-400 leading-tight truncate">
-                {c.label}
-              </span>
-              <Icon className={`w-4 h-4 ${c.color} flex-shrink-0`} />
-            </div>
-            <div className="flex items-baseline gap-2">
-              <span className="text-2xl font-bold font-mono tracking-tight text-slate-100">
+            <div>
+              {/* Card Header: Label & Icon aligned */}
+              <div className="flex items-center justify-between gap-2 mb-2">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                  {c.label}
+                </span>
+                <Icon className={`w-4 h-4 ${c.color} flex-shrink-0`} />
+              </div>
+
+              {/* Crisp White KPI */}
+              <div className="text-3xl font-extrabold font-mono text-white tracking-tight">
                 {c.value}
-              </span>
+              </div>
             </div>
-            <p className="text-[11px] text-slate-400 mt-1 truncate">
+
+            {/* Subtext */}
+            <p className="text-[11px] font-medium text-slate-400 mt-2.5 pt-2 border-t border-white/5 truncate">
               {c.subtext}
             </p>
           </div>
